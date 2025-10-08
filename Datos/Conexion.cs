@@ -1,8 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 // --------------------
-// Referencia a MySQL (se agrega como libreria)
-using MySql.Data.MySqlClient;
 
 namespace Proyecto_Integrador_Grupo_11_B.Datos
 {
@@ -39,6 +37,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 cadena = null;
                 throw ;
             }
