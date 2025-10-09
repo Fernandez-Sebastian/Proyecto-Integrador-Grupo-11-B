@@ -1,6 +1,4 @@
-using System;
 using System.Data;
-using System.Windows.Forms;
 using Proyecto_Integrador_Grupo_11_B.Datos;
 
 namespace Proyecto_Integrador_Grupo_11_B

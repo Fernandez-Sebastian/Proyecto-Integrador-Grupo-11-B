@@ -9,15 +9,15 @@
         private void RegistrarSocio_Click(object sender, EventArgs e)
         {
             // Crear una instancia del formulario RegistrarSocio
-            RegistrarSocio formRegistrar = new();
+            RegistrarSocio formRegistrarSocio = new RegistrarSocio();
 
             // Mostrarlo como modal (bloquea el formulario actual hasta que se cierre)
-            formRegistrar.ShowDialog();
+            formRegistrarSocio.ShowDialog();
         }
 
-        private void SistemaClub_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }
