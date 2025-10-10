@@ -1,6 +1,6 @@
 ﻿namespace Proyecto_Integrador_Grupo_11_B
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -68,6 +68,17 @@
             txtPass.TabIndex = 3;
             txtPass.BorderStyle = BorderStyle.FixedSingle;
             txtPass.UseSystemPasswordChar = true;
+            txtPass.ForeColor = SystemColors.ControlText;
+            txtPass.Location = new Point(214, 88);
+            txtPass.MaxLength = 20;
+            txtPass.Name = "txtPass";
+            txtPass.PasswordChar = '*';
+            txtPass.ShortcutsEnabled = false;
+            txtPass.Size = new Size(100, 23);
+            txtPass.TabIndex = 3;
+            txtPass.UseSystemPasswordChar = true;
+            txtPass.Enter += TxtPass_Enter;
+            txtPass.Leave += TxtPass_Leave;
             // 
             // txtUsuario
             // 
@@ -130,7 +141,7 @@
             button2.TabIndex = 5;
             button2.Text = "Ingresar";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += btnIngresar_Click;
+            button2.Click += BtnIngresar_Click;
             // 
             // header
             // 
@@ -155,6 +166,10 @@
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // Form1
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += BtnIngresar_Click;
+            // 
+            // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -173,6 +188,9 @@
             Text = "Club Deportivo";
             AcceptButton = button2;
             CancelButton = BtnSalir;
+            Name = "Login";
+            Text = "Club Deportivo";
+            Load += Login_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             header.ResumeLayout(false);

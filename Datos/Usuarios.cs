@@ -31,6 +31,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 throw;
             }
             // como proceso final
