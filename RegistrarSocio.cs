@@ -130,7 +130,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                     if (filas > 0)
                     {
-                        MessageBox.Show("Socio registrado correctamente. Para realizar una actividad debe tener la cuota al día");
+                        MessageBox.Show($"Socio {nombre} {apellido} registrado correctamente. Para realizar una actividad debe tener la cuota al día.");
                         // limpiar campos
                         txtDni.Clear();
                         txtNombre.Clear();
