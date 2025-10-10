@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
-            pictureBox1 = new PictureBox();
+            imgAltaSocio = new PictureBox();
             groupBox2 = new GroupBox();
             dtpFechaNacimiento = new DateTimePicker();
             chkAptoMedico = new CheckBox();
@@ -47,13 +47,13 @@
             Registrar = new Button();
             VolverMenu = new Button();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgAltaSocio).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(pictureBox1);
+            groupBox1.Controls.Add(imgAltaSocio);
             groupBox1.Location = new Point(31, 46);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(208, 280);
@@ -61,13 +61,15 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "groupBox1";
             // 
-            // pictureBox1
+            // imgAltaSocio
             // 
-            pictureBox1.Location = new Point(15, 25);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(177, 149);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            imgAltaSocio.Image = Properties.Resources.AltaSocio;
+            imgAltaSocio.Location = new Point(28, 22);
+            imgAltaSocio.Name = "imgAltaSocio";
+            imgAltaSocio.Size = new Size(154, 146);
+            imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
+            imgAltaSocio.TabIndex = 0;
+            imgAltaSocio.TabStop = false;
             // 
             // groupBox2
             // 
@@ -115,6 +117,7 @@
             PagarCuota.TabIndex = 13;
             PagarCuota.Text = "Abonar Cuota";
             PagarCuota.UseVisualStyleBackColor = true;
+            PagarCuota.Click += PagarCuota_Click;
             // 
             // button1
             // 
@@ -133,6 +136,7 @@
             ImprimirCarnet.TabIndex = 4;
             ImprimirCarnet.Text = "Imprimir Carnet";
             ImprimirCarnet.UseVisualStyleBackColor = true;
+            ImprimirCarnet.Click += ImprimirCarnet_Click;
             // 
             // txtDni
             // 
@@ -232,7 +236,7 @@
             Name = "RegistrarSocio";
             Text = "Registrar Socio";
             groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgAltaSocio).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -256,7 +260,7 @@
         private CheckBox chkAptoMedico;
         private Button PagarCuota;
         private Button button1;
-        private PictureBox pictureBox1;
+        private PictureBox imgAltaSocio;
         private DateTimePicker dtpFechaNacimiento;
     }
 }

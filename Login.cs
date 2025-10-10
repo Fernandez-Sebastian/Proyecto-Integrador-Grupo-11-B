@@ -76,7 +76,17 @@ namespace Proyecto_Integrador_Grupo_11_B
 
         private void BtnSalir_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show(
+                "¿Seguro que deseas salir del sistema?",
+                "Confirmar salida",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }

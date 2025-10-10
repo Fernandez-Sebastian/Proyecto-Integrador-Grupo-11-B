@@ -17,7 +17,32 @@
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult result = MessageBox.Show(
+                "¿Seguro que deseas salir del sistema?",
+                "Confirmar salida",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void RegistrarNoSocio_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Altas de No Socios en Desarrollo");
+        }
+
+        private void CobrarCuota_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Cobro Cuota en Desarrollo");
+        }
+
+        private void MostrarDeudaCuotaSocio_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Deuda de socios en Desarrollo");
         }
     }
 }
