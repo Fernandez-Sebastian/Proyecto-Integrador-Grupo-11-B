@@ -33,8 +33,6 @@
             groupBox2 = new GroupBox();
             dtpFechaNacimiento = new DateTimePicker();
             chkAptoMedico = new CheckBox();
-            PagarCuota = new Button();
-            button1 = new Button();
             ImprimirCarnet = new Button();
             txtDni = new TextBox();
             txtApellido = new TextBox();
@@ -75,8 +73,6 @@
             // 
             groupBox2.Controls.Add(dtpFechaNacimiento);
             groupBox2.Controls.Add(chkAptoMedico);
-            groupBox2.Controls.Add(PagarCuota);
-            groupBox2.Controls.Add(button1);
             groupBox2.Controls.Add(ImprimirCarnet);
             groupBox2.Controls.Add(txtDni);
             groupBox2.Controls.Add(txtApellido);
@@ -109,28 +105,9 @@
             chkAptoMedico.TabIndex = 0;
             chkAptoMedico.UseVisualStyleBackColor = true;
             // 
-            // PagarCuota
-            // 
-            PagarCuota.Location = new Point(62, 215);
-            PagarCuota.Name = "PagarCuota";
-            PagarCuota.Size = new Size(182, 49);
-            PagarCuota.TabIndex = 13;
-            PagarCuota.Text = "Abonar Cuota";
-            PagarCuota.UseVisualStyleBackColor = true;
-            PagarCuota.Click += PagarCuota_Click;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(113, 235);
-            button1.Name = "button1";
-            button1.Size = new Size(8, 8);
-            button1.TabIndex = 12;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // ImprimirCarnet
             // 
-            ImprimirCarnet.Location = new Point(296, 215);
+            ImprimirCarnet.Location = new Point(24, 205);
             ImprimirCarnet.Name = "ImprimirCarnet";
             ImprimirCarnet.Size = new Size(182, 49);
             ImprimirCarnet.TabIndex = 4;
@@ -258,8 +235,6 @@
         private Button VolverMenu;
         private Button ImprimirCarnet;
         private CheckBox chkAptoMedico;
-        private Button PagarCuota;
-        private Button button1;
         private PictureBox imgAltaSocio;
         private DateTimePicker dtpFechaNacimiento;
     }

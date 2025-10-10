@@ -130,7 +130,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                     if (filas > 0)
                     {
-                        MessageBox.Show("Socio registrado correctamente.");
+                        MessageBox.Show("Socio registrado correctamente. Para realizar una actividad debe tener la cuota al día");
                         // limpiar campos
                         txtDni.Clear();
                         txtNombre.Clear();
@@ -151,11 +151,6 @@ namespace Proyecto_Integrador_Grupo_11_B
             {
                 MessageBox.Show("Error al registrar el socio: " + ex.Message);
             }
-        }
-
-        private void PagarCuota_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Pagar Cuota en Desarrollo");
         }
 
         private void ImprimirCarnet_Click(object sender, EventArgs e)
