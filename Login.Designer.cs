@@ -141,7 +141,6 @@
             button2.TabIndex = 5;
             button2.Text = "Ingresar";
             button2.UseVisualStyleBackColor = false;
-            button2.Click += BtnIngresar_Click;
             // 
             // header
             // 
