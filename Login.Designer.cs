@@ -44,17 +44,18 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.BackColor = Color.FromArgb(232, 239, 249);
             groupBox1.Controls.Add(txtPass);
             groupBox1.Controls.Add(txtUsuario);
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            groupBox1.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
-            groupBox1.BackColor = ColorTranslator.FromHtml("#E8EFF9");
-            groupBox1.Location = new Point(60, 70);
+            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.FromArgb(31, 31, 31);
+            groupBox1.Location = new Point(69, 93);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(16, 12, 16, 16);
-            groupBox1.Size = new Size(463, 185);
+            groupBox1.Padding = new Padding(18, 16, 18, 21);
+            groupBox1.Size = new Size(529, 247);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Login";
@@ -62,19 +63,15 @@
             // txtPass
             // 
             txtPass.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtPass.Location = new Point(200, 98);
-            txtPass.Name = "txtPass";
-            txtPass.Size = new Size(210, 25);
-            txtPass.TabIndex = 3;
             txtPass.BorderStyle = BorderStyle.FixedSingle;
-            txtPass.UseSystemPasswordChar = true;
             txtPass.ForeColor = SystemColors.ControlText;
-            txtPass.Location = new Point(214, 88);
+            txtPass.Location = new Point(229, 125);
+            txtPass.Margin = new Padding(3, 5, 3, 5);
             txtPass.MaxLength = 20;
             txtPass.Name = "txtPass";
             txtPass.PasswordChar = '*';
             txtPass.ShortcutsEnabled = false;
-            txtPass.Size = new Size(100, 23);
+            txtPass.Size = new Size(240, 30);
             txtPass.TabIndex = 3;
             txtPass.UseSystemPasswordChar = true;
             txtPass.Enter += TxtPass_Enter;
@@ -83,113 +80,111 @@
             // txtUsuario
             // 
             txtUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            txtUsuario.Location = new Point(200, 57);
-            txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(210, 25);
-            txtUsuario.TabIndex = 2;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
+            txtUsuario.Location = new Point(229, 76);
+            txtUsuario.Margin = new Padding(3, 4, 3, 4);
+            txtUsuario.Name = "txtUsuario";
+            txtUsuario.Size = new Size(240, 30);
+            txtUsuario.TabIndex = 2;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
-            label2.Location = new Point(54, 101);
+            label2.Font = new Font("Segoe UI", 9F);
+            label2.ForeColor = Color.FromArgb(76, 76, 76);
+            label2.Location = new Point(62, 135);
             label2.Name = "label2";
-            label2.Size = new Size(72, 15);
+            label2.Size = new Size(83, 20);
             label2.TabIndex = 1;
             label2.Text = "Contraseña";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
-            label1.Location = new Point(54, 60);
+            label1.Font = new Font("Segoe UI", 9F);
+            label1.ForeColor = Color.FromArgb(76, 76, 76);
+            label1.Location = new Point(62, 80);
             label1.Name = "label1";
-            label1.Size = new Size(50, 15);
+            label1.Size = new Size(59, 20);
             label1.TabIndex = 0;
             label1.Text = "Usuario";
             // 
             // BtnSalir
             // 
             BtnSalir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            BtnSalir.BackColor = ColorTranslator.FromHtml("#B0C4DE");
+            BtnSalir.BackColor = Color.FromArgb(176, 196, 222);
             BtnSalir.FlatAppearance.BorderSize = 0;
             BtnSalir.FlatStyle = FlatStyle.Flat;
-            BtnSalir.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            BtnSalir.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
-            BtnSalir.Location = new Point(60, 280);
+            BtnSalir.Font = new Font("Segoe UI", 9F);
+            BtnSalir.ForeColor = Color.FromArgb(31, 31, 31);
+            BtnSalir.Location = new Point(69, 373);
+            BtnSalir.Margin = new Padding(3, 4, 3, 4);
             BtnSalir.Name = "BtnSalir";
-            BtnSalir.Size = new Size(95, 32);
+            BtnSalir.Size = new Size(109, 43);
             BtnSalir.TabIndex = 4;
             BtnSalir.Text = "Salir";
             BtnSalir.UseVisualStyleBackColor = false;
             BtnSalir.Click += BtnSalir_Click;
             // 
-            // button2 (Ingresar)
+            // button2
             // 
             button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.BackColor = ColorTranslator.FromHtml("#8AC285");
+            button2.BackColor = Color.FromArgb(138, 194, 133);
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button2.ForeColor = Color.White;
-            button2.Location = new Point(428, 280);
+            button2.Location = new Point(489, 373);
+            button2.Margin = new Padding(3, 4, 3, 4);
             button2.Name = "button2";
-            button2.Size = new Size(95, 32);
+            button2.Size = new Size(109, 43);
             button2.TabIndex = 5;
             button2.Text = "Ingresar";
-            button2.UseVisualStyleBackColor = false;
+            button2.UseVisualStyleBackColor = true;
             button2.Click += BtnIngresar_Click;
             // 
             // header
             // 
-            header.BackColor = ColorTranslator.FromHtml("#4A8DF8");
+            header.BackColor = Color.FromArgb(74, 141, 248);
             header.Controls.Add(lblTitulo);
             header.Dock = DockStyle.Top;
             header.Location = new Point(0, 0);
+            header.Margin = new Padding(3, 4, 3, 4);
             header.Name = "header";
-            header.Size = new Size(583, 44);
+            header.Size = new Size(666, 59);
             header.TabIndex = 6;
             // 
             // lblTitulo
             // 
             lblTitulo.Dock = DockStyle.Fill;
-            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(583, 44);
+            lblTitulo.Size = new Size(666, 59);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Club Deportivo";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // Form1
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += BtnIngresar_Click;
-            // 
             // Login
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AcceptButton = button2;
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = ColorTranslator.FromHtml("#F3F6FB");
-            ClientSize = new Size(583, 342);
+            BackColor = Color.FromArgb(243, 246, 251);
+            CancelButton = BtnSalir;
+            ClientSize = new Size(666, 456);
             Controls.Add(header);
             Controls.Add(button2);
             Controls.Add(BtnSalir);
             Controls.Add(groupBox1);
-            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 9F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "Form1";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Club Deportivo";
-            AcceptButton = button2;
-            CancelButton = BtnSalir;
             Name = "Login";
-            Text = "Club Deportivo";
+            StartPosition = FormStartPosition.CenterScreen;
             Load += Login_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
