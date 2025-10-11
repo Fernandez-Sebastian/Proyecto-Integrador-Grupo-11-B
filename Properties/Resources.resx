@@ -124,4 +124,10 @@
   <data name="AltaSocio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AltaSocio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="lista_verde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lista_verde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pago" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pago.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

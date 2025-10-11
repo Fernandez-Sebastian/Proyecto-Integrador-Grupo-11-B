@@ -1,5 +1,5 @@
-using System.Data;
 using Proyecto_Integrador_Grupo_11_B.Datos;
+using System.Data;
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
@@ -58,9 +58,8 @@ namespace Proyecto_Integrador_Grupo_11_B
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
-            DataTable tablaLogin = new();
             Usuarios dato = new();
-            tablaLogin = dato.Log_Usu(txtUsuario.Text, txtPass.Text);
+            DataTable tablaLogin = dato.Log_Usu(txtUsuario.Text, txtPass.Text);
 
             if (tablaLogin.Rows.Count > 0)
             {

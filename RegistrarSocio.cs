@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using Proyecto_Integrador_Grupo_11_B;
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
@@ -58,7 +57,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             int edad = DateTime.Today.Year - fechaNacimiento.Year;
             // calcula el mes de nacimiento para determinar si ya cumplió o no los años.
-            if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--; 
+            if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--;
 
             // La fecha del socio debe ser mayor que 5 años y menor que 100 años
             // Además no se puede ingresar una edad mayor al día de hoy
@@ -100,9 +99,8 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
 
                 // Agregamos alerta para confirmar el Nuevo alta de Socio
-                string DatosAlta = apellido + ", " + nombre + " (" + dni + ")";
                 DialogResult result = MessageBox.Show(
-                    "¿Seguro que deseas Dar de alta a ? " + DatosAlta,
+                    $"¿Seguro que deseas dar de alta a {nombre} {apellido} DNI: {dni}? ",
                     "Confirmar salida",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question

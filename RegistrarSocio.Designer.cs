@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            header = new Panel();
+            lblTitulo = new Label();
             groupBox1 = new GroupBox();
             imgAltaSocio = new PictureBox();
             groupBox2 = new GroupBox();
@@ -44,33 +46,62 @@
             label1 = new Label();
             Registrar = new Button();
             VolverMenu = new Button();
+            header.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgAltaSocio).BeginInit();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
-            // groupBox1
+            // header
             // 
+            header.BackColor = ColorTranslator.FromHtml("#4A8DF8");
+            header.Controls.Add(lblTitulo);
+            header.Dock = DockStyle.Top;
+            header.Location = new Point(0, 0);
+            header.Name = "header";
+            header.Size = new Size(800, 48);
+            header.TabIndex = 0;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.Dock = DockStyle.Fill;
+            lblTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitulo.ForeColor = Color.White;
+            lblTitulo.Location = new Point(0, 0);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(800, 48);
+            lblTitulo.TabIndex = 0;
+            lblTitulo.Text = "Registrar Socio";
+            lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // groupBox1 (avatar)
+            // 
+            groupBox1.BackColor = ColorTranslator.FromHtml("#E8EFF9");
             groupBox1.Controls.Add(imgAltaSocio);
-            groupBox1.Location = new Point(31, 46);
+            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox1.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
+            groupBox1.Location = new Point(24, 68);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(208, 280);
-            groupBox1.TabIndex = 0;
+            groupBox1.Padding = new Padding(14);
+            groupBox1.Size = new Size(210, 290);
+            groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
             // 
             // imgAltaSocio
             // 
+            imgAltaSocio.BorderStyle = BorderStyle.FixedSingle;
             imgAltaSocio.Image = Properties.Resources.AltaSocio;
-            imgAltaSocio.Location = new Point(28, 22);
+            imgAltaSocio.Location = new Point(28, 28);
             imgAltaSocio.Name = "imgAltaSocio";
-            imgAltaSocio.Size = new Size(154, 146);
+            imgAltaSocio.Size = new Size(154, 154);
             imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
             imgAltaSocio.TabIndex = 0;
             imgAltaSocio.TabStop = false;
             // 
-            // groupBox2
+            // groupBox2 (datos)
             // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.BackColor = ColorTranslator.FromHtml("#E8EFF9");
             groupBox2.Controls.Add(dtpFechaNacimiento);
             groupBox2.Controls.Add(chkAptoMedico);
             groupBox2.Controls.Add(ImprimirCarnet);
@@ -82,136 +113,190 @@
             groupBox2.Controls.Add(label4);
             groupBox2.Controls.Add(label2);
             groupBox2.Controls.Add(label1);
-            groupBox2.Location = new Point(245, 46);
+            groupBox2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            groupBox2.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
+            groupBox2.Location = new Point(250, 68);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(510, 280);
-            groupBox2.TabIndex = 1;
+            groupBox2.Padding = new Padding(16, 12, 16, 16);
+            groupBox2.Size = new Size(526, 290);
+            groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
+            groupBox2.Text = "Datos";
             // 
             // dtpFechaNacimiento
             // 
-            dtpFechaNacimiento.Location = new Point(148, 137);
+            dtpFechaNacimiento.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dtpFechaNacimiento.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dtpFechaNacimiento.Format = DateTimePickerFormat.Long;
+            dtpFechaNacimiento.Location = new Point(170, 139);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(241, 23);
-            dtpFechaNacimiento.TabIndex = 14;
+            dtpFechaNacimiento.Size = new Size(260, 23);
+            dtpFechaNacimiento.TabIndex = 4;
             // 
             // chkAptoMedico
             // 
             chkAptoMedico.AutoSize = true;
-            chkAptoMedico.Location = new Point(387, 82);
+            chkAptoMedico.Location = new Point(404, 86);
             chkAptoMedico.Name = "chkAptoMedico";
             chkAptoMedico.Size = new Size(15, 14);
-            chkAptoMedico.TabIndex = 0;
+            chkAptoMedico.TabIndex = 3;
             chkAptoMedico.UseVisualStyleBackColor = true;
             // 
             // ImprimirCarnet
             // 
-            ImprimirCarnet.Location = new Point(24, 205);
+            ImprimirCarnet.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            ImprimirCarnet.BackColor = Color.White;
+            ImprimirCarnet.FlatAppearance.BorderColor = ColorTranslator.FromHtml("#B0C4DE");
+            ImprimirCarnet.FlatAppearance.BorderSize = 1;
+            ImprimirCarnet.FlatStyle = FlatStyle.Flat;
+            ImprimirCarnet.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            ImprimirCarnet.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
+            ImprimirCarnet.Location = new Point(24, 204);
             ImprimirCarnet.Name = "ImprimirCarnet";
-            ImprimirCarnet.Size = new Size(182, 49);
-            ImprimirCarnet.TabIndex = 4;
-            ImprimirCarnet.Text = "Imprimir Carnet";
-            ImprimirCarnet.UseVisualStyleBackColor = true;
+            ImprimirCarnet.Size = new Size(190, 44);
+            ImprimirCarnet.TabIndex = 5;
+            ImprimirCarnet.Text = "Imprimir carnet";
+            ImprimirCarnet.UseVisualStyleBackColor = false;
             ImprimirCarnet.Click += ImprimirCarnet_Click;
             // 
             // txtDni
             // 
-            txtDni.Location = new Point(369, 28);
+            txtDni.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            txtDni.BorderStyle = BorderStyle.FixedSingle;
+            txtDni.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtDni.Location = new Point(370, 32);
             txtDni.Name = "txtDni";
-            txtDni.Size = new Size(109, 23);
-            txtDni.TabIndex = 9;
+            txtDni.Size = new Size(110, 23);
+            txtDni.TabIndex = 2;
             // 
             // txtApellido
             // 
-            txtApellido.Location = new Point(135, 81);
+            txtApellido.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            txtApellido.BorderStyle = BorderStyle.FixedSingle;
+            txtApellido.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtApellido.Location = new Point(135, 80);
             txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(109, 23);
-            txtApellido.TabIndex = 7;
+            txtApellido.Size = new Size(130, 23);
+            txtApellido.TabIndex = 1;
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(135, 28);
+            txtNombre.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            txtNombre.BorderStyle = BorderStyle.FixedSingle;
+            txtNombre.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNombre.Location = new Point(135, 32);
             txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(109, 23);
-            txtNombre.TabIndex = 6;
+            txtNombre.Size = new Size(130, 23);
+            txtNombre.TabIndex = 0;
             // 
             // AptoMedico
             // 
             AptoMedico.AutoSize = true;
-            AptoMedico.Location = new Point(305, 81);
+            AptoMedico.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            AptoMedico.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
+            AptoMedico.Location = new Point(305, 84);
             AptoMedico.Name = "AptoMedico";
-            AptoMedico.Size = new Size(76, 15);
-            AptoMedico.TabIndex = 5;
-            AptoMedico.Text = "Apto Médico";
+            AptoMedico.Size = new Size(79, 15);
+            AptoMedico.TabIndex = 10;
+            AptoMedico.Text = "Apto médico";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(24, 145);
+            label5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label5.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
+            label5.Location = new Point(24, 142);
             label5.Name = "label5";
-            label5.Size = new Size(106, 15);
-            label5.TabIndex = 4;
-            label5.Text = "Fecha Nacimiento:";
+            label5.Size = new Size(110, 15);
+            label5.TabIndex = 9;
+            label5.Text = "Fecha nacimiento:";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(305, 36);
+            label4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
+            label4.Location = new Point(305, 35);
             label4.Name = "label4";
-            label4.Size = new Size(30, 15);
-            label4.TabIndex = 3;
+            label4.Size = new Size(29, 15);
+            label4.TabIndex = 8;
             label4.Text = "DNI:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 84);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
+            label2.Location = new Point(24, 83);
             label2.Name = "label2";
             label2.Size = new Size(54, 15);
-            label2.TabIndex = 1;
+            label2.TabIndex = 7;
             label2.Text = "Apellido:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(24, 36);
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.ForeColor = ColorTranslator.FromHtml("#4C4C4C");
+            label1.Location = new Point(24, 35);
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
-            label1.TabIndex = 0;
+            label1.TabIndex = 6;
             label1.Text = "Nombre:";
             // 
-            // Registrar
+            // Registrar (btn registrar)
             // 
-            Registrar.Location = new Point(573, 389);
+            Registrar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            Registrar.BackColor = ColorTranslator.FromHtml("#8AC285");
+            Registrar.FlatAppearance.BorderSize = 0;
+            Registrar.FlatStyle = FlatStyle.Flat;
+            Registrar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            Registrar.ForeColor = Color.White;
+            Registrar.Location = new Point(588, 392);
             Registrar.Name = "Registrar";
-            Registrar.Size = new Size(182, 49);
-            Registrar.TabIndex = 2;
+            Registrar.Size = new Size(188, 44);
+            Registrar.TabIndex = 6;
             Registrar.Text = "Registrar";
-            Registrar.UseVisualStyleBackColor = true;
+            Registrar.UseVisualStyleBackColor = false;
             Registrar.Click += Registrar_Click;
             // 
-            // VolverMenu
+            // VolverMenu (btn volver)
             // 
-            VolverMenu.Location = new Point(31, 389);
+            VolverMenu.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            VolverMenu.BackColor = ColorTranslator.FromHtml("#B0C4DE");
+            VolverMenu.FlatAppearance.BorderSize = 0;
+            VolverMenu.FlatStyle = FlatStyle.Flat;
+            VolverMenu.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            VolverMenu.ForeColor = ColorTranslator.FromHtml("#1F1F1F");
+            VolverMenu.Location = new Point(24, 392);
             VolverMenu.Name = "VolverMenu";
-            VolverMenu.Size = new Size(182, 49);
-            VolverMenu.TabIndex = 3;
+            VolverMenu.Size = new Size(188, 44);
+            VolverMenu.TabIndex = 5;
             VolverMenu.Text = "Volver";
-            VolverMenu.UseVisualStyleBackColor = true;
+            VolverMenu.UseVisualStyleBackColor = false;
             VolverMenu.Click += VolverMenu_Click;
             // 
-            // RegistrarSocio
+            // RegistrarSocio (form)
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = ColorTranslator.FromHtml("#F3F6FB");
             ClientSize = new Size(800, 450);
             Controls.Add(VolverMenu);
             Controls.Add(Registrar);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
+            Controls.Add(header);
+            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "RegistrarSocio";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar Socio";
+            AcceptButton = Registrar;
+            CancelButton = VolverMenu;
+            header.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)imgAltaSocio).EndInit();
             groupBox2.ResumeLayout(false);
@@ -221,8 +306,14 @@
 
         #endregion
 
+        private Panel header;
+        private Label lblTitulo;
         private GroupBox groupBox1;
+        private PictureBox imgAltaSocio;
         private GroupBox groupBox2;
+        private DateTimePicker dtpFechaNacimiento;
+        private CheckBox chkAptoMedico;
+        private Button ImprimirCarnet;
         private TextBox txtDni;
         private TextBox txtApellido;
         private TextBox txtNombre;
@@ -233,9 +324,5 @@
         private Label label1;
         private Button Registrar;
         private Button VolverMenu;
-        private Button ImprimirCarnet;
-        private CheckBox chkAptoMedico;
-        private PictureBox imgAltaSocio;
-        private DateTimePicker dtpFechaNacimiento;
     }
 }
