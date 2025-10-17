@@ -274,6 +274,7 @@
             VolverMenu.TabIndex = 5;
             VolverMenu.Text = "Volver";
             VolverMenu.UseVisualStyleBackColor = false;
+            VolverMenu.DialogResult = DialogResult.None;
             VolverMenu.Click += VolverMenu_Click;
             // 
             // RegistrarSocio (form)
@@ -295,7 +296,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registrar Socio";
             AcceptButton = Registrar;
-            CancelButton = VolverMenu;
             header.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)imgAltaSocio).EndInit();

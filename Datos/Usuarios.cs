@@ -20,7 +20,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
                 MySqlCommand comando = new MySqlCommand("IngresoLogin", sqlCon);
                 comando.CommandType = CommandType.StoredProcedure;
                 // definimos los parametros que tiene el procedure
-                comando.Parameters.Add("Usu",MySqlDbType.VarChar).Value = L_Usu;
+                comando.Parameters.Add("Usu", MySqlDbType.VarChar).Value = L_Usu;
                 comando.Parameters.Add("Pass", MySqlDbType.VarChar).Value = P_Usu;
                 // abrimos la conexion
                 sqlCon.Open();
@@ -38,8 +38,8 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
             finally
             {
                 if (sqlCon.State == ConnectionState.Open)
-                { 
-                    sqlCon.Close(); 
+                {
+                    sqlCon.Close();
                 }
             }
         }
