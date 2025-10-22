@@ -2,9 +2,9 @@
 {
     internal class Persona
     {
-        protected string Dni { get; set; }
-        protected string Nombre { get; set; }
-        protected string Apellido { get; set; }
+        public string Dni { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
 
     }
 }

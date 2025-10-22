@@ -31,6 +31,9 @@ namespace Proyecto_Integrador_Grupo_11_B
                 // Se crea una instancia la clase Socio.
                 Socio NuevoSocio = new();
 
+                // Declaramso la variable para capturar y mostrar el error.
+                string error = "";
+
                 // Tomamos los valores del formulario y lo asignamos a variables para hacer las validaciones correspondientes.
                 string dni = txtDni.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
@@ -84,7 +87,8 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                 // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del Socio.
                 // Valido que el DNI no este registardo.
-                if (NuevoSocio.ExisteDni(dni) == "S")
+                
+                if (NuevoSocio.ExisteDni(dni,out error))
                 {
                     MessageBox.Show($"Ya existe un socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -105,7 +109,10 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
 
                 // Carga de datos y registro el Socio en la base de datos.
-                NuevoSocio.SetDatosPersona(dni, nombre, apellido);
+               
+                NuevoSocio.Dni = dni;
+                NuevoSocio.Nombre = nombre;
+                NuevoSocio.Apellido = apellido;
                 NuevoSocio.FechaNacimiento = fechaNacimiento;
                 NuevoSocio.AptoMedico = aptoMedico;
                 string EstadoAlta = NuevoSocio.RegistrarSocio();

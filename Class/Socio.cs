@@ -47,7 +47,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
         
         // Función que devuelve true o false si existe en la base de datos el DNI ingresado.
         // Validar si el DNI ya existe
-        public string ExisteDni(string Dni)
+        public bool ExisteDni(string Dni, out string error )
         {
             try
             {
@@ -60,27 +60,25 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     {
                         cmd.Parameters.AddWithValue("@dni", Dni);
                         int cantidad = Convert.ToInt32(cmd.ExecuteScalar());
-                        if(cantidad > 0)
-                        {
-                            return "S";
-                        }
-                        return "N";
+                        error = string.Empty;
+                        return cantidad > 0;
                     }
                 }
             }
             catch (Exception ex)
             {
-                return "ERROR: " + ex.Message;
+                error = "ERROR " + ex.Message;
+                return false;
             }
         }
 
         // Seteo los campos heredados
-        public void SetDatosPersona(string dni, string nombre, string apellido)
-        {
-            this.Dni = dni;
-            this.Nombre = nombre;
-            this.Apellido = apellido;
-        }
+        //public void SetDatosPersona(string dni, string nombre, string apellido)
+        //{
+        //    this.Dni = dni;
+        //    this.Nombre = nombre;
+        //    this.Apellido = apellido;
+        //}
 
     }
 }
