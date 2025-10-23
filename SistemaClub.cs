@@ -44,5 +44,10 @@
         {
             MessageBox.Show("Deuda de socios en Desarrollo");
         }
+
+        private void CobrarActividad_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("cobrar actividad en Desarrollo");
+        }
     }
 }

@@ -40,6 +40,9 @@
             cardCuotas = new GroupBox();
             pbIconCuotas = new PictureBox();
             CobrarCuota = new Button();
+            cardActividad = new GroupBox();
+            pbIconActividad = new PictureBox();
+            CobrarActividad = new Button();
             SalirSistema = new Button();
             header.SuspendLayout();
             cardRegistro.SuspendLayout();
@@ -48,6 +51,8 @@
             ((System.ComponentModel.ISupportInitialize)pbIconDeudores).BeginInit();
             cardCuotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbIconCuotas).BeginInit();
+            cardActividad.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbIconActividad).BeginInit();
             SuspendLayout();
             // 
             // header
@@ -57,7 +62,7 @@
             header.Dock = DockStyle.Top;
             header.Location = new Point(0, 0);
             header.Name = "header";
-            header.Size = new Size(914, 64);
+            header.Size = new Size(1218, 64);
             header.TabIndex = 0;
             // 
             // lblTitulo
@@ -67,7 +72,7 @@
             lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(914, 64);
+            lblTitulo.Size = new Size(1218, 64);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Sistema del Club";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -215,6 +220,49 @@
             CobrarCuota.UseVisualStyleBackColor = false;
             CobrarCuota.Click += CobrarCuota_Click;
             // 
+            // cardActividad
+            // 
+            cardActividad.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            cardActividad.BackColor = Color.FromArgb(232, 239, 249);
+            cardActividad.Controls.Add(pbIconActividad);
+            cardActividad.Controls.Add(CobrarActividad);
+            cardActividad.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            cardActividad.ForeColor = Color.FromArgb(31, 31, 31);
+            cardActividad.Location = new Point(896, 91);
+            cardActividad.Name = "cardActividad";
+            cardActividad.Padding = new Padding(18, 16, 18, 21);
+            cardActividad.Size = new Size(295, 347);
+            cardActividad.TabIndex = 4;
+            cardActividad.TabStop = false;
+            cardActividad.Text = "Actividad";
+            // 
+            // pbIconActividad
+            // 
+            pbIconActividad.Anchor = AnchorStyles.Top;
+            pbIconActividad.Image = Properties.Resources.actividad;
+            pbIconActividad.Location = new Point(73, 69);
+            pbIconActividad.Name = "pbIconActividad";
+            pbIconActividad.Size = new Size(147, 148);
+            pbIconActividad.SizeMode = PictureBoxSizeMode.Zoom;
+            pbIconActividad.TabIndex = 2;
+            pbIconActividad.TabStop = false;
+            // 
+            // CobrarActividad
+            // 
+            CobrarActividad.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            CobrarActividad.BackColor = Color.White;
+            CobrarActividad.FlatAppearance.BorderColor = Color.FromArgb(176, 196, 222);
+            CobrarActividad.FlatStyle = FlatStyle.Flat;
+            CobrarActividad.Font = new Font("Segoe UI", 9F);
+            CobrarActividad.ForeColor = Color.FromArgb(31, 31, 31);
+            CobrarActividad.Location = new Point(23, 264);
+            CobrarActividad.Name = "CobrarActividad";
+            CobrarActividad.Size = new Size(249, 59);
+            CobrarActividad.TabIndex = 1;
+            CobrarActividad.Text = "Cobrar actividad";
+            CobrarActividad.UseVisualStyleBackColor = false;
+            CobrarActividad.Click += CobrarActividad_Click;
+            // 
             // SalirSistema
             // 
             SalirSistema.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -226,7 +274,7 @@
             SalirSistema.Location = new Point(27, 509);
             SalirSistema.Name = "SalirSistema";
             SalirSistema.Size = new Size(251, 59);
-            SalirSistema.TabIndex = 4;
+            SalirSistema.TabIndex = 5;
             SalirSistema.Text = "Salir";
             SalirSistema.UseVisualStyleBackColor = false;
             SalirSistema.Click += button1_Click;
@@ -236,11 +284,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 246, 251);
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(1218, 600);
             Controls.Add(SalirSistema);
             Controls.Add(cardCuotas);
             Controls.Add(cardDeudores);
             Controls.Add(cardRegistro);
+            Controls.Add(cardActividad);
             Controls.Add(header);
             Font = new Font("Segoe UI", 9F);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -256,6 +305,8 @@
             ((System.ComponentModel.ISupportInitialize)pbIconDeudores).EndInit();
             cardCuotas.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pbIconCuotas).EndInit();
+            cardActividad.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pbIconActividad).EndInit();
             ResumeLayout(false);
         }
 
@@ -276,6 +327,10 @@
         private GroupBox cardCuotas;
         private PictureBox pbIconCuotas;
         private Button CobrarCuota;
+
+        private GroupBox cardActividad;
+        private PictureBox pbIconActividad;
+        private Button CobrarActividad;
 
         private Button SalirSistema;
     }

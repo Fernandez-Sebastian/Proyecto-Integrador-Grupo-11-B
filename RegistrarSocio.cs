@@ -87,8 +87,8 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                 // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del Socio.
                 // Valido que el DNI no este registardo.
-                
-                if (NuevoSocio.ExisteDni(dni,out error))
+
+                if (NuevoSocio.ExisteDni(dni, out error))
                 {
                     MessageBox.Show($"Ya existe un socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -109,7 +109,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
 
                 // Carga de datos y registro el Socio en la base de datos.
-               
+
                 NuevoSocio.Dni = dni;
                 NuevoSocio.Nombre = nombre;
                 NuevoSocio.Apellido = apellido;

@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 // --------------------
 
 namespace Proyecto_Integrador_Grupo_11_B.Datos
@@ -14,13 +13,13 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
         private string clave;
         private static Conexion? con = null;
         private Conexion() // asignamos valores a las variables de la conexion
-            {
-                this.baseDatos = "ClubDeportivo";
-                this.servidor = "localhost";
-                this.puerto = "3306";
-                this.usuario = "root";
-                this.clave = "";
-            }
+        {
+            this.baseDatos = "ClubDeportivo";
+            this.servidor = "localhost";
+            this.puerto = "3306";
+            this.usuario = "root";
+            this.clave = "";
+        }
         // proceso de interacción
         public MySqlConnection CrearConexion()
         {
@@ -39,7 +38,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
             {
                 MessageBox.Show(ex.Message);
                 cadena = null;
-                throw ;
+                throw;
             }
             return cadena;
         }
