@@ -2,9 +2,9 @@
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
-    public partial class RegistrarSocio : Form
+    public partial class RegistrarNoSocio : Form
     {
-        public RegistrarSocio()
+        public RegistrarNoSocio()
         {
             InitializeComponent();
         }
@@ -28,8 +28,8 @@ namespace Proyecto_Integrador_Grupo_11_B
         {
             try
             {
-                // Se crea una instancia la clase Socio.
-                Socio NuevoSocio = new();
+                // Se crea una instancia la clase No Socio.
+                NoSocio NuevoNoSocio = new();
 
                 // Declaramso la variable para capturar y mostrar el error.
                 string error = "";
@@ -67,16 +67,16 @@ namespace Proyecto_Integrador_Grupo_11_B
                 // calcula el mes de nacimiento para determinar si ya cumplió o no los años.
                 if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--;
 
-                // La fecha del socio debe ser mayor que 5 años y menor que 100 años
+                // La fecha del No socio debe ser mayor que 5 años y menor que 100 años
                 // Además no se puede ingresar una edad mayor al día de hoy
                 if (fechaNacimiento > DateTime.Today)
                 {
-                    MessageBox.Show("La fecha de nacimiento no puede ser futura.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La fecha de nacimiento no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (edad < 5)
                 {
-                    MessageBox.Show("El socio debe tener al menos 5 años.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El No Socio debe tener al menos 5 años.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (edad > 100)
@@ -85,17 +85,17 @@ namespace Proyecto_Integrador_Grupo_11_B
                     return;
                 }
 
-                // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del Socio.
+                // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del No Socio.
                 // Valido que el DNI no este registardo.
 
-                if (NuevoSocio.ExisteDni(dni, out error))
+                if (NuevoNoSocio.ExisteDni(dni, out error))
                 {
-                    MessageBox.Show($"Ya existe un socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Ya existe un No Socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Si llegamos aca, el DNI ingresado no esta duplicado y los datos estan validados.
-                // Agregamos alerta para confirmar el Nuevo alta de Socio.
+                // Agregamos alerta para confirmar el Nuevo alta del No Socio.
                 DialogResult result = MessageBox.Show(
                     $"¿Seguro que deseas dar de alta a {nombre} {apellido} DNI: {dni}? ",
                     "Confirmar salida",
@@ -108,37 +108,37 @@ namespace Proyecto_Integrador_Grupo_11_B
                     return;
                 }
 
-                // Carga de datos y registro el Socio en la base de datos.
+                // Carga de datos y registro del No Socio en la base de datos.
 
-                NuevoSocio.Dni = dni;
-                NuevoSocio.Nombre = nombre;
-                NuevoSocio.Apellido = apellido;
-                NuevoSocio.FechaNacimiento = fechaNacimiento;
-                NuevoSocio.AptoMedico = aptoMedico;
-                string EstadoAlta = NuevoSocio.RegistrarSocio();
+                NuevoNoSocio.Dni = dni;
+                NuevoNoSocio.Nombre = nombre;
+                NuevoNoSocio.Apellido = apellido;
+                NuevoNoSocio.FechaNacimiento = fechaNacimiento;
+                NuevoNoSocio.AptoMedico = aptoMedico;
+                string EstadoAlta = NuevoNoSocio.RegistrarNoSocio();
 
                 if (EstadoAlta == "OK")
                 {
-                    MessageBox.Show($"\"Socio {nombre} {apellido} registrado correctamente. Para realizar una actividad debe realizar el Pago de una Actividad.\"");
+                    MessageBox.Show($"No Socio: {nombre} {apellido} registrado correctamente. Para realizar una actividad debe tener la cuota al día.");
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("No se pudo registrar el socio.");
+                    MessageBox.Show("No se pudo registrar el No Socio.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurrió un error inesperado durante el registro del socio:\n{ex.Message}",
+                MessageBox.Show($"Ocurrió un error inesperado durante el registro del No Socio:\n{ex.Message}",
                                 "Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
         }
 
-        private void ImprimirCarnet_Click(object sender, EventArgs e)
+        private void lblTitulo_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Imprimir Carnet en Desarrollo");
+
         }
     }
 }

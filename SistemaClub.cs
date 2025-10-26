@@ -32,7 +32,11 @@
 
         private void RegistrarNoSocio_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Altas de No Socios en Desarrollo");
+            // Crear una instancia del formulario RegistrarNoSocio
+            RegistrarNoSocio formRegistrarNoSocio = new RegistrarNoSocio();
+
+            // Mostrarlo como modal (bloquea el formulario actual hasta que se cierre)
+            formRegistrarNoSocio.ShowDialog();
         }
 
         private void CobrarCuota_Click(object sender, EventArgs e)
