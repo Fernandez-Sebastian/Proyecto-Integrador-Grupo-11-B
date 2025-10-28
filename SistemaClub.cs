@@ -37,7 +37,11 @@
 
         private void CobrarCuota_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Cobro Cuota en Desarrollo");
+            // Crear una instancia del formulario RegistrarSocio
+            CobrarCuota formPagarCuota = new();
+
+            // Mostrarlo como modal (bloquea el formulario actual hasta que se cierre)
+            formPagarCuota.ShowDialog();
         }
 
         private void MostrarDeudaCuotaSocio_Click(object sender, EventArgs e)
