@@ -45,18 +45,18 @@
             label1 = new Label();
             VolverMenu = new Button();
             groupBox1 = new GroupBox();
+            groupBox3 = new GroupBox();
+            imgAltaSocio = new PictureBox();
+            radioTransferencia = new RadioButton();
+            radioEfectivo = new RadioButton();
+            radioTarjeta = new RadioButton();
+            checkBoxAbonarTodo = new CheckBox();
+            label6 = new Label();
             comboBoxCuotas = new ComboBox();
             PagarCuota = new Button();
             button1 = new Button();
             button2 = new Button();
             label12 = new Label();
-            label6 = new Label();
-            checkBoxAbonarTodo = new CheckBox();
-            groupBox3 = new GroupBox();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
-            imgAltaSocio = new PictureBox();
             header.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -288,6 +288,83 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos De La Deuda";
             // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(imgAltaSocio);
+            groupBox3.Controls.Add(radioTransferencia);
+            groupBox3.Controls.Add(radioEfectivo);
+            groupBox3.Controls.Add(radioTarjeta);
+            groupBox3.Location = new Point(15, 138);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(277, 170);
+            groupBox3.TabIndex = 15;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Método de Pago";
+            // 
+            // imgAltaSocio
+            // 
+            imgAltaSocio.BorderStyle = BorderStyle.FixedSingle;
+            imgAltaSocio.Image = Properties.Resources.pago;
+            imgAltaSocio.Location = new Point(6, 49);
+            imgAltaSocio.Name = "imgAltaSocio";
+            imgAltaSocio.Size = new Size(93, 98);
+            imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
+            imgAltaSocio.TabIndex = 15;
+            imgAltaSocio.TabStop = false;
+            // 
+            // radioTransferencia
+            // 
+            radioTransferencia.AutoSize = true;
+            radioTransferencia.Location = new Point(128, 124);
+            radioTransferencia.Name = "radioTransferencia";
+            radioTransferencia.Size = new Size(116, 23);
+            radioTransferencia.TabIndex = 2;
+            radioTransferencia.TabStop = true;
+            radioTransferencia.Text = "Transferencia";
+            radioTransferencia.UseVisualStyleBackColor = true;
+            // 
+            // radioEfectivo
+            // 
+            radioEfectivo.AutoSize = true;
+            radioEfectivo.Location = new Point(128, 42);
+            radioEfectivo.Name = "radioEfectivo";
+            radioEfectivo.Size = new Size(80, 23);
+            radioEfectivo.TabIndex = 1;
+            radioEfectivo.TabStop = true;
+            radioEfectivo.Text = "Efectivo";
+            radioEfectivo.UseVisualStyleBackColor = true;
+            // 
+            // radioTarjeta
+            // 
+            radioTarjeta.AutoSize = true;
+            radioTarjeta.Location = new Point(128, 81);
+            radioTarjeta.Name = "radioTarjeta";
+            radioTarjeta.Size = new Size(73, 23);
+            radioTarjeta.TabIndex = 0;
+            radioTarjeta.TabStop = true;
+            radioTarjeta.Text = "Tarjeta";
+            radioTarjeta.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAbonarTodo
+            // 
+            checkBoxAbonarTodo.AutoSize = true;
+            checkBoxAbonarTodo.Location = new Point(230, 73);
+            checkBoxAbonarTodo.Name = "checkBoxAbonarTodo";
+            checkBoxAbonarTodo.Size = new Size(15, 14);
+            checkBoxAbonarTodo.TabIndex = 14;
+            checkBoxAbonarTodo.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F);
+            label6.ForeColor = Color.FromArgb(76, 76, 76);
+            label6.Location = new Point(19, 72);
+            label6.Name = "label6";
+            label6.Size = new Size(193, 15);
+            label6.TabIndex = 13;
+            label6.Text = "Abonar todas las cuotas adeudadas";
+            // 
             // comboBoxCuotas
             // 
             comboBoxCuotas.FormattingEnabled = true;
@@ -304,12 +381,13 @@
             PagarCuota.FlatStyle = FlatStyle.Flat;
             PagarCuota.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             PagarCuota.ForeColor = Color.White;
-            PagarCuota.Location = new Point(349, 245);
+            PagarCuota.Location = new Point(357, 262);
             PagarCuota.Name = "PagarCuota";
             PagarCuota.Size = new Size(188, 40);
             PagarCuota.TabIndex = 11;
             PagarCuota.Text = "Pagar Cuota";
             PagarCuota.UseVisualStyleBackColor = false;
+            PagarCuota.Visible = false;
             PagarCuota.Click += PagarCuota_Click;
             // 
             // button1
@@ -352,83 +430,6 @@
             label12.Size = new Size(129, 15);
             label12.TabIndex = 6;
             label12.Text = "Elige la cuota a abonar:";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F);
-            label6.ForeColor = Color.FromArgb(76, 76, 76);
-            label6.Location = new Point(19, 72);
-            label6.Name = "label6";
-            label6.Size = new Size(193, 15);
-            label6.TabIndex = 13;
-            label6.Text = "Abonar todas las cuotas adeudadas";
-            // 
-            // checkBoxAbonarTodo
-            // 
-            checkBoxAbonarTodo.AutoSize = true;
-            checkBoxAbonarTodo.Location = new Point(230, 73);
-            checkBoxAbonarTodo.Name = "checkBoxAbonarTodo";
-            checkBoxAbonarTodo.Size = new Size(15, 14);
-            checkBoxAbonarTodo.TabIndex = 14;
-            checkBoxAbonarTodo.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            groupBox3.Controls.Add(imgAltaSocio);
-            groupBox3.Controls.Add(radioButton3);
-            groupBox3.Controls.Add(radioButton2);
-            groupBox3.Controls.Add(radioButton1);
-            groupBox3.Location = new Point(15, 138);
-            groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(277, 170);
-            groupBox3.TabIndex = 15;
-            groupBox3.TabStop = false;
-            groupBox3.Text = "Método de Pago";
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(128, 81);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(73, 23);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Tarjeta";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(128, 42);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(80, 23);
-            radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Efectivo";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            radioButton3.AutoSize = true;
-            radioButton3.Location = new Point(128, 124);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(116, 23);
-            radioButton3.TabIndex = 2;
-            radioButton3.TabStop = true;
-            radioButton3.Text = "Transferencia";
-            radioButton3.UseVisualStyleBackColor = true;
-            // 
-            // imgAltaSocio
-            // 
-            imgAltaSocio.BorderStyle = BorderStyle.FixedSingle;
-            imgAltaSocio.Image = Properties.Resources.pago;
-            imgAltaSocio.Location = new Point(6, 49);
-            imgAltaSocio.Name = "imgAltaSocio";
-            imgAltaSocio.Size = new Size(93, 98);
-            imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
-            imgAltaSocio.TabIndex = 15;
-            imgAltaSocio.TabStop = false;
             // 
             // CobrarCuota
             // 
@@ -479,9 +480,9 @@
         private CheckBox checkBoxAbonarTodo;
         private Label label6;
         private GroupBox groupBox3;
-        private RadioButton radioButton3;
-        private RadioButton radioButton2;
-        private RadioButton radioButton1;
+        private RadioButton radioTransferencia;
+        private RadioButton radioEfectivo;
+        private RadioButton radioTarjeta;
         private PictureBox imgAltaSocio;
     }
 }
