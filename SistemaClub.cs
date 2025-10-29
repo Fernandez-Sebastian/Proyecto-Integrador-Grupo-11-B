@@ -47,7 +47,11 @@
 
         private void CobrarActividad_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("cobrar actividad en Desarrollo");
+            // Crear instancia del formulario
+            CobrarActividad formCobrar = new CobrarActividad();
+
+            // Mostrarlo como modal (bloquea la ventana principal hasta cerrarlo)
+            formCobrar.ShowDialog();
         }
     }
 }
