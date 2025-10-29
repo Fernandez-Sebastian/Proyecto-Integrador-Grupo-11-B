@@ -31,8 +31,6 @@
             lblTitulo = new Label();
             header = new Panel();
             groupBox2 = new GroupBox();
-            txtFechaPagoCuota = new TextBox();
-            label6 = new Label();
             txtHabilitado = new TextBox();
             label5 = new Label();
             textNumeroSocio = new TextBox();
@@ -46,8 +44,24 @@
             label2 = new Label();
             label1 = new Label();
             VolverMenu = new Button();
+            groupBox1 = new GroupBox();
+            comboBoxCuotas = new ComboBox();
+            PagarCuota = new Button();
+            button1 = new Button();
+            button2 = new Button();
+            label12 = new Label();
+            label6 = new Label();
+            checkBoxAbonarTodo = new CheckBox();
+            groupBox3 = new GroupBox();
+            radioButton1 = new RadioButton();
+            radioButton2 = new RadioButton();
+            radioButton3 = new RadioButton();
+            imgAltaSocio = new PictureBox();
             header.SuspendLayout();
             groupBox2.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)imgAltaSocio).BeginInit();
             SuspendLayout();
             // 
             // lblTitulo
@@ -77,8 +91,6 @@
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.FromArgb(232, 239, 249);
-            groupBox2.Controls.Add(txtFechaPagoCuota);
-            groupBox2.Controls.Add(label6);
             groupBox2.Controls.Add(txtHabilitado);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(textNumeroSocio);
@@ -93,7 +105,7 @@
             groupBox2.Controls.Add(label1);
             groupBox2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             groupBox2.ForeColor = Color.FromArgb(31, 31, 31);
-            groupBox2.Location = new Point(22, 98);
+            groupBox2.Location = new Point(22, 66);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(16, 12, 16, 16);
             groupBox2.Size = new Size(588, 313);
@@ -101,32 +113,11 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos Del Socio";
             // 
-            // txtFechaPagoCuota
-            // 
-            txtFechaPagoCuota.BorderStyle = BorderStyle.FixedSingle;
-            txtFechaPagoCuota.Font = new Font("Segoe UI", 9F);
-            txtFechaPagoCuota.Location = new Point(119, 215);
-            txtFechaPagoCuota.Name = "txtFechaPagoCuota";
-            txtFechaPagoCuota.ReadOnly = true;
-            txtFechaPagoCuota.Size = new Size(130, 23);
-            txtFechaPagoCuota.TabIndex = 15;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F);
-            label6.ForeColor = Color.FromArgb(76, 76, 76);
-            label6.Location = new Point(11, 215);
-            label6.Name = "label6";
-            label6.Size = new Size(103, 15);
-            label6.TabIndex = 16;
-            label6.Text = "Fecha Pago Cuota";
-            // 
             // txtHabilitado
             // 
             txtHabilitado.BorderStyle = BorderStyle.FixedSingle;
             txtHabilitado.Font = new Font("Segoe UI", 9F);
-            txtHabilitado.Location = new Point(349, 215);
+            txtHabilitado.Location = new Point(382, 144);
             txtHabilitado.Name = "txtHabilitado";
             txtHabilitado.ReadOnly = true;
             txtHabilitado.Size = new Size(130, 23);
@@ -137,7 +128,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 9F);
             label5.ForeColor = Color.FromArgb(76, 76, 76);
-            label5.Location = new Point(278, 215);
+            label5.Location = new Point(289, 138);
             label5.Name = "label5";
             label5.Size = new Size(65, 15);
             label5.TabIndex = 14;
@@ -147,7 +138,7 @@
             // 
             textNumeroSocio.BorderStyle = BorderStyle.FixedSingle;
             textNumeroSocio.Font = new Font("Segoe UI", 9F);
-            textNumeroSocio.Location = new Point(119, 172);
+            textNumeroSocio.Location = new Point(119, 144);
             textNumeroSocio.Name = "textNumeroSocio";
             textNumeroSocio.ReadOnly = true;
             textNumeroSocio.Size = new Size(130, 23);
@@ -158,7 +149,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F);
             label3.ForeColor = Color.FromArgb(76, 76, 76);
-            label3.Location = new Point(11, 172);
+            label3.Location = new Point(11, 144);
             label3.Name = "label3";
             label3.Size = new Size(102, 15);
             label3.TabIndex = 12;
@@ -172,7 +163,7 @@
             BuscarDeuda.FlatStyle = FlatStyle.Flat;
             BuscarDeuda.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             BuscarDeuda.ForeColor = Color.White;
-            BuscarDeuda.Location = new Point(119, 254);
+            BuscarDeuda.Location = new Point(181, 254);
             BuscarDeuda.Name = "BuscarDeuda";
             BuscarDeuda.Size = new Size(188, 40);
             BuscarDeuda.TabIndex = 10;
@@ -188,7 +179,7 @@
             BuscarSocio.FlatStyle = FlatStyle.Flat;
             BuscarSocio.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             BuscarSocio.ForeColor = Color.White;
-            BuscarSocio.Location = new Point(293, 26);
+            BuscarSocio.Location = new Point(324, 26);
             BuscarSocio.Name = "BuscarSocio";
             BuscarSocio.Size = new Size(188, 40);
             BuscarSocio.TabIndex = 9;
@@ -200,7 +191,7 @@
             // 
             txtDni.BorderStyle = BorderStyle.FixedSingle;
             txtDni.Font = new Font("Segoe UI", 9F);
-            txtDni.Location = new Point(49, 37);
+            txtDni.Location = new Point(119, 37);
             txtDni.Name = "txtDni";
             txtDni.PlaceholderText = "    Ingrese DNI a buscar";
             txtDni.Size = new Size(152, 23);
@@ -210,7 +201,7 @@
             // 
             txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.Font = new Font("Segoe UI", 9F);
-            txtApellido.Location = new Point(349, 129);
+            txtApellido.Location = new Point(382, 101);
             txtApellido.Name = "txtApellido";
             txtApellido.ReadOnly = true;
             txtApellido.Size = new Size(130, 23);
@@ -220,7 +211,7 @@
             // 
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.Font = new Font("Segoe UI", 9F);
-            txtNombre.Location = new Point(119, 127);
+            txtNombre.Location = new Point(119, 99);
             txtNombre.Name = "txtNombre";
             txtNombre.ReadOnly = true;
             txtNombre.Size = new Size(130, 23);
@@ -231,7 +222,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F);
             label4.ForeColor = Color.FromArgb(76, 76, 76);
-            label4.Location = new Point(13, 39);
+            label4.Location = new Point(83, 45);
             label4.Name = "label4";
             label4.Size = new Size(30, 15);
             label4.TabIndex = 8;
@@ -242,7 +233,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 9F);
             label2.ForeColor = Color.FromArgb(76, 76, 76);
-            label2.Location = new Point(289, 127);
+            label2.Location = new Point(289, 99);
             label2.Name = "label2";
             label2.Size = new Size(54, 15);
             label2.TabIndex = 7;
@@ -253,7 +244,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 9F);
             label1.ForeColor = Color.FromArgb(76, 76, 76);
-            label1.Location = new Point(59, 129);
+            label1.Location = new Point(59, 101);
             label1.Name = "label1";
             label1.Size = new Size(54, 15);
             label1.TabIndex = 6;
@@ -275,11 +266,176 @@
             VolverMenu.UseVisualStyleBackColor = false;
             VolverMenu.Click += VolverMenu_Click;
             // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.BackColor = Color.FromArgb(232, 239, 249);
+            groupBox1.Controls.Add(groupBox3);
+            groupBox1.Controls.Add(checkBoxAbonarTodo);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(comboBoxCuotas);
+            groupBox1.Controls.Add(PagarCuota);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(button2);
+            groupBox1.Controls.Add(label12);
+            groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            groupBox1.ForeColor = Color.FromArgb(31, 31, 31);
+            groupBox1.Location = new Point(22, 417);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(16, 12, 16, 16);
+            groupBox1.Size = new Size(588, 327);
+            groupBox1.TabIndex = 11;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Datos De La Deuda";
+            // 
+            // comboBoxCuotas
+            // 
+            comboBoxCuotas.FormattingEnabled = true;
+            comboBoxCuotas.Location = new Point(230, 33);
+            comboBoxCuotas.Name = "comboBoxCuotas";
+            comboBoxCuotas.Size = new Size(262, 25);
+            comboBoxCuotas.TabIndex = 12;
+            // 
+            // PagarCuota
+            // 
+            PagarCuota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            PagarCuota.BackColor = Color.FromArgb(138, 194, 133);
+            PagarCuota.FlatAppearance.BorderSize = 0;
+            PagarCuota.FlatStyle = FlatStyle.Flat;
+            PagarCuota.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            PagarCuota.ForeColor = Color.White;
+            PagarCuota.Location = new Point(349, 245);
+            PagarCuota.Name = "PagarCuota";
+            PagarCuota.Size = new Size(188, 40);
+            PagarCuota.TabIndex = 11;
+            PagarCuota.Text = "Pagar Cuota";
+            PagarCuota.UseVisualStyleBackColor = false;
+            PagarCuota.Click += PagarCuota_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button1.BackColor = Color.FromArgb(138, 194, 133);
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(494, 468);
+            button1.Name = "button1";
+            button1.Size = new Size(188, 40);
+            button1.TabIndex = 10;
+            button1.Text = "Buscar Deuda";
+            button1.UseVisualStyleBackColor = false;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button2.BackColor = Color.FromArgb(138, 194, 133);
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button2.ForeColor = Color.White;
+            button2.Location = new Point(668, 240);
+            button2.Name = "button2";
+            button2.Size = new Size(188, 40);
+            button2.TabIndex = 9;
+            button2.Text = "Buscar Socio";
+            button2.UseVisualStyleBackColor = false;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 9F);
+            label12.ForeColor = Color.FromArgb(76, 76, 76);
+            label12.Location = new Point(19, 43);
+            label12.Name = "label12";
+            label12.Size = new Size(129, 15);
+            label12.TabIndex = 6;
+            label12.Text = "Elige la cuota a abonar:";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 9F);
+            label6.ForeColor = Color.FromArgb(76, 76, 76);
+            label6.Location = new Point(19, 72);
+            label6.Name = "label6";
+            label6.Size = new Size(193, 15);
+            label6.TabIndex = 13;
+            label6.Text = "Abonar todas las cuotas adeudadas";
+            // 
+            // checkBoxAbonarTodo
+            // 
+            checkBoxAbonarTodo.AutoSize = true;
+            checkBoxAbonarTodo.Location = new Point(230, 73);
+            checkBoxAbonarTodo.Name = "checkBoxAbonarTodo";
+            checkBoxAbonarTodo.Size = new Size(15, 14);
+            checkBoxAbonarTodo.TabIndex = 14;
+            checkBoxAbonarTodo.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(imgAltaSocio);
+            groupBox3.Controls.Add(radioButton3);
+            groupBox3.Controls.Add(radioButton2);
+            groupBox3.Controls.Add(radioButton1);
+            groupBox3.Location = new Point(15, 138);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(277, 170);
+            groupBox3.TabIndex = 15;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Método de Pago";
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(128, 81);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(73, 23);
+            radioButton1.TabIndex = 0;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Tarjeta";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(128, 42);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(80, 23);
+            radioButton2.TabIndex = 1;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Efectivo";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton3
+            // 
+            radioButton3.AutoSize = true;
+            radioButton3.Location = new Point(128, 124);
+            radioButton3.Name = "radioButton3";
+            radioButton3.Size = new Size(116, 23);
+            radioButton3.TabIndex = 2;
+            radioButton3.TabStop = true;
+            radioButton3.Text = "Transferencia";
+            radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // imgAltaSocio
+            // 
+            imgAltaSocio.BorderStyle = BorderStyle.FixedSingle;
+            imgAltaSocio.Image = Properties.Resources.pago;
+            imgAltaSocio.Location = new Point(6, 49);
+            imgAltaSocio.Name = "imgAltaSocio";
+            imgAltaSocio.Size = new Size(93, 98);
+            imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
+            imgAltaSocio.TabIndex = 15;
+            imgAltaSocio.TabStop = false;
+            // 
             // CobrarCuota
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(622, 819);
+            Controls.Add(groupBox1);
             Controls.Add(VolverMenu);
             Controls.Add(groupBox2);
             Controls.Add(header);
@@ -288,6 +444,11 @@
             header.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)imgAltaSocio).EndInit();
             ResumeLayout(false);
         }
 
@@ -309,7 +470,18 @@
         private Label label3;
         private Button BuscarDeuda;
         private Button VolverMenu;
-        private TextBox txtFechaPagoCuota;
+        private GroupBox groupBox1;
+        private Button button1;
+        private Button button2;
+        private Label label12;
+        private ComboBox comboBoxCuotas;
+        private Button PagarCuota;
+        private CheckBox checkBoxAbonarTodo;
         private Label label6;
+        private GroupBox groupBox3;
+        private RadioButton radioButton3;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
+        private PictureBox imgAltaSocio;
     }
 }

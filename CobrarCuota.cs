@@ -1,4 +1,5 @@
-﻿using Proyecto_Integrador_Grupo_11_B.Class;
+﻿using MySql.Data.MySqlClient;
+using Proyecto_Integrador_Grupo_11_B.Class;
 using System.Net;
 
 namespace Proyecto_Integrador_Grupo_11_B
@@ -63,6 +64,31 @@ namespace Proyecto_Integrador_Grupo_11_B
         }
 
         private void BuscarDeuda_Click(object sender, EventArgs e)
+        {
+            // Bloquear el campo DNI para que no se pueda modificar
+            txtDni.Enabled = false;
+
+            // Guardar el idSocio en una variable
+            int idSocio = int.Parse(textNumeroSocio.Text);
+
+            // Limpiar ComboBox antes de llenar
+            comboBoxCuotas.Items.Clear();
+
+            // Obtener la lista de cuotas adeudadas (la conexión se maneja dentro del método)
+            List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
+
+            // Llenar ComboBox
+            foreach (Cuota c in cuotasAdeudadas)
+            {
+                comboBoxCuotas.Items.Add(c);
+            }
+
+            // Opcional: seleccionar la primera cuota
+            if (comboBoxCuotas.Items.Count > 0)
+                comboBoxCuotas.SelectedIndex = 0;
+        }
+
+        private void PagarCuota_Click(object sender, EventArgs e)
         {
 
         }
