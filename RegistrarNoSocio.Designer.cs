@@ -1,4 +1,6 @@
-﻿namespace Proyecto_Integrador_Grupo_11_B
+﻿using Proyecto_Integrador_Grupo_11_B.Themes;
+
+namespace Proyecto_Integrador_Grupo_11_B
 {
     partial class RegistrarNoSocio
     {
@@ -279,6 +281,8 @@
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
+
+            Tema.Aplicar(this);
         }
 
         #endregion
