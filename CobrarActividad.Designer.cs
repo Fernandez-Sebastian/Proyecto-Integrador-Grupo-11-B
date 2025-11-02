@@ -50,6 +50,7 @@
             btnCobrar = new Button();
             header = new Panel();
             lblTitulo = new Label();
+            button1 = new Button();
             groupBox1.SuspendLayout();
             header.SuspendLayout();
             SuspendLayout();
@@ -318,11 +319,26 @@
             lblTitulo.Text = "Cobrar Actividad";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // button1
+            // 
+            button1.BackColor = Color.FromArgb(230, 120, 120);            
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(621, 369);
+            button1.Name = "button1";
+            button1.Size = new Size(120, 40);
+            button1.TabIndex = 20;
+            button1.Text = "Cerrar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += btnCerrar_Click;
+            // 
             // CobrarActividad
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 475);
+            Controls.Add(button1);
             Controls.Add(header);
             Controls.Add(btnCobrar);
             Controls.Add(groupBox1);
@@ -374,5 +390,6 @@
         private Button btnCobrar;
         private Panel header;
         private Label lblTitulo;
+        private Button button1;
     }
 }

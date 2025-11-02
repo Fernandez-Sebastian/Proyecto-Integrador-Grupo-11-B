@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Cursor;
 using Proyecto_Integrador_Grupo_11_B.Class;
 using Proyecto_Integrador_Grupo_11_B.Datos;
 using System;
@@ -24,7 +25,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             this.Shown += CobrarActividad_Shown;
             cmbActividad.SelectedIndexChanged += cmbActividad_SelectedIndexChanged;
             btnCobrar.Enabled = false;
-            
+
             //Verificamos que los campos estén completos para que se habilite
             //el botón Cobrar
             txtDni.TextChanged += (s, e) => VerificarCamposCompletos();
@@ -38,6 +39,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             txtNombre.ReadOnly = true;
             txtApellido.ReadOnly = true;
             txtAptoMedico.ReadOnly = true;
+            txtPrecio.ReadOnly = true;
         }
 
         private void CobrarActividad_Load(object sender, EventArgs e)
@@ -81,7 +83,6 @@ namespace Proyecto_Integrador_Grupo_11_B
             string dni = txtDni.Text.Trim();
             if (!string.IsNullOrEmpty(dni))
             {
-                // Supongamos que tenés un método que busca en la BD o en tu lista de NoSocios
                 NoSocio ns = BuscarNoSocioPorDni(dni);
 
                 if (ns != null)
@@ -94,12 +95,12 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
                 else
                 {
-                    MessageBox.Show("No se encontró el NoSocio con ese ID");
+                    MessageBox.Show("No se encontró el NoSocio con ese DNI");
                 }
             }
             else
             {
-                MessageBox.Show("El ID ingresado no es válido");
+                MessageBox.Show("El DNI ingresado no es válido");
             }
         }
 
@@ -242,7 +243,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             }
 
             // Crear el objeto comprobante
-            var comprobante = new ComprobanteDePago(
+            var comprobante = new ComprobanteDePagoActividad(
                 txtIdNoSocio.Text,
                 txtNombre.Text,
                 txtApellido.Text,
@@ -254,7 +255,47 @@ namespace Proyecto_Integrador_Grupo_11_B
             // Abrir el nuevo formulario del comprobante
             FrmComprobantePago frm = new FrmComprobantePago(comprobante);
             frm.ShowDialog();
+
+            // Registrar el cobro en la base de datos
+            int idNoSocio = Convert.ToInt32(txtIdNoSocio.Text);
+            int idActividad = Convert.ToInt32(cmbActividad.SelectedValue);
+            double precio = Convert.ToDouble(txtPrecio.Text);
+            DateTime dia = DateTime.Now.Date; // Fecha actual
+            TimeSpan horario = DateTime.Now.TimeOfDay; // Hora actual
+            string medioDePago = medioDePagoSeleccionado;
+
+
+            this.RegistrarCobro(idNoSocio, idActividad, precio, dia, horario, medioDePago);
+
+            MessageBox.Show("Cobro registrado correctamente.");
         }
 
+        public void RegistrarCobro(int idNoSocio, int idActividad, double precio, DateTime dia, TimeSpan horario, string medioDePago)
+        {
+            using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+            {
+                string query = @"INSERT INTO CobroActividad
+                             (IdNoSocio, IdActividad, Precio, Dia, Horario, MedioDePago)
+                             VALUES (@IdNoSocio, @IdActividad, @Precio, @Dia, @Horario, @MedioDePago)";
+
+                using (var command = new MySqlCommand(query, conn))
+                {
+                    command.Parameters.AddWithValue("@IdNoSocio", idNoSocio);
+                    command.Parameters.AddWithValue("@IdActividad", idActividad);
+                    command.Parameters.AddWithValue("@Precio", precio);
+                    command.Parameters.AddWithValue("@Dia", dia.Date);
+                    command.Parameters.AddWithValue("@Horario", horario);
+                    command.Parameters.AddWithValue("@MedioDePago", medioDePago);
+
+                    conn.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void btnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

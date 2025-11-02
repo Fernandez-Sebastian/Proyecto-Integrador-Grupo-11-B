@@ -11,7 +11,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
         public int IdActividad { get; set; }
         public string Nombre { get; set; }
         public DateTime Dia { get; set; }
-        public DateTime Horario { get; set; }
+        public TimeSpan Horario { get; set; }
         public int Cupo { get; set; }
         public string ProfesorAsignado { get; set; }
         public double PrecioActividad { get; set; }

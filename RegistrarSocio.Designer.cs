@@ -95,7 +95,7 @@
             imgAltaSocio.Name = "imgAltaSocio";
             imgAltaSocio.Size = new Size(154, 154);
             imgAltaSocio.SizeMode = PictureBoxSizeMode.Zoom;
-            imgAltaSocio.TabIndex = 0;
+            imgAltaSocio.TabIndex = 1;
             imgAltaSocio.TabStop = false;
             // 
             // groupBox2 (datos)
