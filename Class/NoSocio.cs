@@ -3,11 +3,12 @@ using Proyecto_Integrador_Grupo_11_B.Datos;
 
 namespace Proyecto_Integrador_Grupo_11_B.Class
 {
-    internal class NoSocio : Persona
+    public class NoSocio : Persona
     {
         public DateTime FechaNacimiento { get; set; }
         public string AptoMedico { get; set; }
-
+        public int IdNoSocio { get; set; }
+        public int? IdActividad { get; set; }
         public string RegistrarNoSocio()
         {
             try
@@ -71,14 +72,6 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 return false;
             }
         }
-
-        // Seteo los campos heredados
-        //public void SetDatosPersona(string dni, string nombre, string apellido)
-        //{
-        //    this.Dni = dni;
-        //    this.Nombre = nombre;
-        //    this.Apellido = apellido;
-        //}
-
     }
 }
+

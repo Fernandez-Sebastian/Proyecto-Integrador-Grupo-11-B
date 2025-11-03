@@ -58,5 +58,17 @@ CREATE TABLE NoSocios (
         ON DELETE SET NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE CobroActividad (
+    IdCobro INT AUTO_INCREMENT PRIMARY KEY,
+    IdNoSocio INT NOT NULL,
+    IdActividad INT NOT NULL,
+    Precio DOUBLE NOT NULL,
+    Dia DATE NOT NULL,
+    Horario TIME NOT NULL,
+    MedioDePago VARCHAR(30) NOT NULL,
+    FOREIGN KEY (IdNoSocio) REFERENCES NoSocios(IdNoSocio),
+    FOREIGN KEY (IdActividad) REFERENCES Actividad(IdActividad)
+) ENGINE=InnoDB;
+
 INSERT INTO usuario(CodUsu,NombreUsu,PassUsu,RolUsu) VALUES
 (1,'emma','123456',120);
