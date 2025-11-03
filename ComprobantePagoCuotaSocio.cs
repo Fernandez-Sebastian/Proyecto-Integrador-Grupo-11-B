@@ -4,7 +4,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 {
     public partial class ComprobantePagoCuotaSocio : Form
     {
-        private ComprobanteDePagoCuotaSocio _comprobante; //  Cambié el tipo para evitar conflicto de nombres
+        private ComprobanteDePagoCuotaSocio _comprobante; 
 
         //  Constructor: recibe el comprobante con los datos del socio y cuotas
         public ComprobantePagoCuotaSocio(ComprobanteDePagoCuotaSocio comprobante)
