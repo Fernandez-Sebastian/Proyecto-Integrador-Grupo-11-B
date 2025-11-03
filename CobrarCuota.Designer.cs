@@ -45,21 +45,28 @@
             label1 = new Label();
             VolverMenu = new Button();
             groupBox1 = new GroupBox();
+            checkBoxAbonarAnio = new CheckBox();
+            labelAbonarAnio = new Label();
+            GroupCantidadDeCuotas = new GroupBox();
+            label7 = new Label();
+            radio3Cuotas = new RadioButton();
+            radio6Cuotas = new RadioButton();
             groupBox3 = new GroupBox();
             imgAltaSocio = new PictureBox();
             radioTransferencia = new RadioButton();
             radioEfectivo = new RadioButton();
             radioTarjeta = new RadioButton();
             checkBoxAbonarTodo = new CheckBox();
-            label6 = new Label();
+            labelTodasCuotasAdeudadas = new Label();
             comboBoxCuotas = new ComboBox();
-            PagarCuota = new Button();
             button1 = new Button();
             button2 = new Button();
-            label12 = new Label();
+            labelComboCuotas = new Label();
+            BtnPagarCuota = new Button();
             header.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
+            GroupCantidadDeCuotas.SuspendLayout();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)imgAltaSocio).BeginInit();
             SuspendLayout();
@@ -270,14 +277,16 @@
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.BackColor = Color.FromArgb(232, 239, 249);
+            groupBox1.Controls.Add(checkBoxAbonarAnio);
+            groupBox1.Controls.Add(labelAbonarAnio);
+            groupBox1.Controls.Add(GroupCantidadDeCuotas);
             groupBox1.Controls.Add(groupBox3);
             groupBox1.Controls.Add(checkBoxAbonarTodo);
-            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(labelTodasCuotasAdeudadas);
             groupBox1.Controls.Add(comboBoxCuotas);
-            groupBox1.Controls.Add(PagarCuota);
             groupBox1.Controls.Add(button1);
             groupBox1.Controls.Add(button2);
-            groupBox1.Controls.Add(label12);
+            groupBox1.Controls.Add(labelComboCuotas);
             groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             groupBox1.ForeColor = Color.FromArgb(31, 31, 31);
             groupBox1.Location = new Point(22, 417);
@@ -287,6 +296,71 @@
             groupBox1.TabIndex = 11;
             groupBox1.TabStop = false;
             groupBox1.Text = "Datos De La Deuda";
+            // 
+            // checkBoxAbonarAnio
+            // 
+            checkBoxAbonarAnio.AutoSize = true;
+            checkBoxAbonarAnio.Location = new Point(234, 33);
+            checkBoxAbonarAnio.Name = "checkBoxAbonarAnio";
+            checkBoxAbonarAnio.Size = new Size(15, 14);
+            checkBoxAbonarAnio.TabIndex = 18;
+            checkBoxAbonarAnio.UseVisualStyleBackColor = true;
+            checkBoxAbonarAnio.Visible = false;
+            // 
+            // labelAbonarAnio
+            // 
+            labelAbonarAnio.AutoSize = true;
+            labelAbonarAnio.Font = new Font("Segoe UI", 9F);
+            labelAbonarAnio.ForeColor = Color.FromArgb(76, 76, 76);
+            labelAbonarAnio.Location = new Point(23, 32);
+            labelAbonarAnio.Name = "labelAbonarAnio";
+            labelAbonarAnio.Size = new Size(169, 15);
+            labelAbonarAnio.TabIndex = 17;
+            labelAbonarAnio.Text = "Abonar por adelantado un año";
+            labelAbonarAnio.Visible = false;
+            // 
+            // GroupCantidadDeCuotas
+            // 
+            GroupCantidadDeCuotas.Controls.Add(label7);
+            GroupCantidadDeCuotas.Controls.Add(radio3Cuotas);
+            GroupCantidadDeCuotas.Controls.Add(radio6Cuotas);
+            GroupCantidadDeCuotas.Location = new Point(311, 138);
+            GroupCantidadDeCuotas.Name = "GroupCantidadDeCuotas";
+            GroupCantidadDeCuotas.Size = new Size(277, 170);
+            GroupCantidadDeCuotas.TabIndex = 16;
+            GroupCantidadDeCuotas.TabStop = false;
+            GroupCantidadDeCuotas.Visible = false;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(6, 20);
+            label7.Name = "label7";
+            label7.Size = new Size(255, 19);
+            label7.TabIndex = 3;
+            label7.Text = "Seleccione en cuantas Cuotas Abona:";
+            // 
+            // radio3Cuotas
+            // 
+            radio3Cuotas.AutoSize = true;
+            radio3Cuotas.Location = new Point(26, 94);
+            radio3Cuotas.Name = "radio3Cuotas";
+            radio3Cuotas.Size = new Size(84, 23);
+            radio3Cuotas.TabIndex = 2;
+            radio3Cuotas.TabStop = true;
+            radio3Cuotas.Text = "3 Cuotas";
+            radio3Cuotas.UseVisualStyleBackColor = true;
+            // 
+            // radio6Cuotas
+            // 
+            radio6Cuotas.AutoSize = true;
+            radio6Cuotas.Location = new Point(154, 94);
+            radio6Cuotas.Name = "radio6Cuotas";
+            radio6Cuotas.Size = new Size(84, 23);
+            radio6Cuotas.TabIndex = 1;
+            radio6Cuotas.TabStop = true;
+            radio6Cuotas.Text = "6 Cuotas";
+            radio6Cuotas.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -322,6 +396,7 @@
             radioTransferencia.TabStop = true;
             radioTransferencia.Text = "Transferencia";
             radioTransferencia.UseVisualStyleBackColor = true;
+            radioTransferencia.CheckedChanged += radioTransferencia_CheckedChanged;
             // 
             // radioEfectivo
             // 
@@ -333,6 +408,7 @@
             radioEfectivo.TabStop = true;
             radioEfectivo.Text = "Efectivo";
             radioEfectivo.UseVisualStyleBackColor = true;
+            radioEfectivo.CheckedChanged += radioEfectivo_CheckedChanged;
             // 
             // radioTarjeta
             // 
@@ -344,51 +420,35 @@
             radioTarjeta.TabStop = true;
             radioTarjeta.Text = "Tarjeta";
             radioTarjeta.UseVisualStyleBackColor = true;
+            radioTarjeta.CheckedChanged += radioTarjeta_CheckedChanged;
             // 
             // checkBoxAbonarTodo
             // 
             checkBoxAbonarTodo.AutoSize = true;
-            checkBoxAbonarTodo.Location = new Point(230, 73);
+            checkBoxAbonarTodo.Location = new Point(234, 93);
             checkBoxAbonarTodo.Name = "checkBoxAbonarTodo";
             checkBoxAbonarTodo.Size = new Size(15, 14);
             checkBoxAbonarTodo.TabIndex = 14;
             checkBoxAbonarTodo.UseVisualStyleBackColor = true;
             // 
-            // label6
+            // labelTodasCuotasAdeudadas
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F);
-            label6.ForeColor = Color.FromArgb(76, 76, 76);
-            label6.Location = new Point(19, 72);
-            label6.Name = "label6";
-            label6.Size = new Size(193, 15);
-            label6.TabIndex = 13;
-            label6.Text = "Abonar todas las cuotas adeudadas";
+            labelTodasCuotasAdeudadas.AutoSize = true;
+            labelTodasCuotasAdeudadas.Font = new Font("Segoe UI", 9F);
+            labelTodasCuotasAdeudadas.ForeColor = Color.FromArgb(76, 76, 76);
+            labelTodasCuotasAdeudadas.Location = new Point(23, 92);
+            labelTodasCuotasAdeudadas.Name = "labelTodasCuotasAdeudadas";
+            labelTodasCuotasAdeudadas.Size = new Size(193, 15);
+            labelTodasCuotasAdeudadas.TabIndex = 13;
+            labelTodasCuotasAdeudadas.Text = "Abonar todas las cuotas adeudadas";
             // 
             // comboBoxCuotas
             // 
             comboBoxCuotas.FormattingEnabled = true;
-            comboBoxCuotas.Location = new Point(230, 33);
+            comboBoxCuotas.Location = new Point(234, 53);
             comboBoxCuotas.Name = "comboBoxCuotas";
-            comboBoxCuotas.Size = new Size(262, 25);
+            comboBoxCuotas.Size = new Size(339, 25);
             comboBoxCuotas.TabIndex = 12;
-            // 
-            // PagarCuota
-            // 
-            PagarCuota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            PagarCuota.BackColor = Color.FromArgb(138, 194, 133);
-            PagarCuota.FlatAppearance.BorderSize = 0;
-            PagarCuota.FlatStyle = FlatStyle.Flat;
-            PagarCuota.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            PagarCuota.ForeColor = Color.White;
-            PagarCuota.Location = new Point(357, 262);
-            PagarCuota.Name = "PagarCuota";
-            PagarCuota.Size = new Size(188, 40);
-            PagarCuota.TabIndex = 11;
-            PagarCuota.Text = "Pagar Cuota";
-            PagarCuota.UseVisualStyleBackColor = false;
-            PagarCuota.Visible = false;
-            PagarCuota.Click += PagarCuota_Click;
             // 
             // button1
             // 
@@ -420,16 +480,33 @@
             button2.Text = "Buscar Socio";
             button2.UseVisualStyleBackColor = false;
             // 
-            // label12
+            // labelComboCuotas
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 9F);
-            label12.ForeColor = Color.FromArgb(76, 76, 76);
-            label12.Location = new Point(19, 43);
-            label12.Name = "label12";
-            label12.Size = new Size(129, 15);
-            label12.TabIndex = 6;
-            label12.Text = "Elige la cuota a abonar:";
+            labelComboCuotas.AutoSize = true;
+            labelComboCuotas.Font = new Font("Segoe UI", 9F);
+            labelComboCuotas.ForeColor = Color.FromArgb(76, 76, 76);
+            labelComboCuotas.Location = new Point(23, 63);
+            labelComboCuotas.Name = "labelComboCuotas";
+            labelComboCuotas.Size = new Size(129, 15);
+            labelComboCuotas.TabIndex = 6;
+            labelComboCuotas.Text = "Elige la cuota a abonar:";
+            // 
+            // BtnPagarCuota
+            // 
+            BtnPagarCuota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnPagarCuota.BackColor = Color.FromArgb(138, 194, 133);
+            BtnPagarCuota.FlatAppearance.BorderSize = 0;
+            BtnPagarCuota.FlatStyle = FlatStyle.Flat;
+            BtnPagarCuota.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            BtnPagarCuota.ForeColor = Color.White;
+            BtnPagarCuota.Location = new Point(383, 767);
+            BtnPagarCuota.Name = "BtnPagarCuota";
+            BtnPagarCuota.Size = new Size(188, 40);
+            BtnPagarCuota.TabIndex = 11;
+            BtnPagarCuota.Text = "Pagar Cuota";
+            BtnPagarCuota.UseVisualStyleBackColor = false;
+            BtnPagarCuota.Visible = false;
+            BtnPagarCuota.Click += PagarCuota_Click;
             // 
             // CobrarCuota
             // 
@@ -440,6 +517,7 @@
             Controls.Add(VolverMenu);
             Controls.Add(groupBox2);
             Controls.Add(header);
+            Controls.Add(BtnPagarCuota);
             Name = "CobrarCuota";
             Text = "CobrarCuota";
             header.ResumeLayout(false);
@@ -447,6 +525,8 @@
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            GroupCantidadDeCuotas.ResumeLayout(false);
+            GroupCantidadDeCuotas.PerformLayout();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)imgAltaSocio).EndInit();
@@ -474,15 +554,21 @@
         private GroupBox groupBox1;
         private Button button1;
         private Button button2;
-        private Label label12;
+        private Label labelComboCuotas;
         private ComboBox comboBoxCuotas;
-        private Button PagarCuota;
+        private Button BtnPagarCuota;
         private CheckBox checkBoxAbonarTodo;
-        private Label label6;
+        private Label labelTodasCuotasAdeudadas;
         private GroupBox groupBox3;
         private RadioButton radioTransferencia;
         private RadioButton radioEfectivo;
         private RadioButton radioTarjeta;
         private PictureBox imgAltaSocio;
+        private GroupBox GroupCantidadDeCuotas;
+        private Label label7;
+        private RadioButton radio3Cuotas;
+        private RadioButton radio6Cuotas;
+        private CheckBox checkBoxAbonarAnio;
+        private Label labelAbonarAnio;
     }
 }

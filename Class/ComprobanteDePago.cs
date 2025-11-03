@@ -1,0 +1,20 @@
+﻿namespace Proyecto_Integrador_Grupo_11_B.Class
+{
+    public abstract class ComprobanteDePago
+    {
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public double Precio { get; set; }
+        public string MedioDePago { get; set; }
+        public DateTime Fecha { get; set; }
+
+        public ComprobanteDePago(string nombre, string apellido, double precio, string medioDePago)
+        {
+            Nombre = nombre;
+            Apellido = apellido;
+            Precio = precio;
+            MedioDePago = medioDePago;
+            Fecha = DateTime.Now;
+        }
+    }
+}

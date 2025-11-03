@@ -116,6 +116,33 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             }
         }
 
+        //Método para actualizar datos de u socio en la base de datos
+        public void ActualizarDatosSocio(int idSocio, String DatosActualizar, out string error)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+                {
+                    conn.Open();
+                    string SQL = @" 
+                                    UPDATE socios
+                                    SET Habilitado = 'S'
+                                    WHERE socios.idSocio = @idSocio";
 
+                    using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@idSocio", idSocio);
+                        cmd.ExecuteNonQuery();
+
+                        error = string.Empty;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                error = "ERROR " + ex.Message;
+            }
+
+        }
     }
 }
