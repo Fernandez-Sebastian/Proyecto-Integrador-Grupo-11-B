@@ -6,7 +6,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 {
     public class Cuota
     {
-        // Atributos de cuota
+        // Atributos de la clase cuota.
         public int IdCuota { get; set; }
         public int IdSocio { get; set; }
         public int NumeroCuota { get; set; }
@@ -21,21 +21,22 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
 
 
-        // Método para buscar cuotas adeudadas por idSocio
-        public static List<Cuota> BuscarCuotasAdeudadas(int idSocio, string Fecha = "" )
+        // Método para buscar cuotas adeudadas por idSocio y la fecha de hoy.
+        // Filtramos todas las cuotas adeudadas que son menor o igual a la fecha de hoy.
+        // (*) El manejo de las cuotas va a ser que SIEMPRE va a tener una cuota IMPAGA del proximo período.
+        // (*) Esa cuota no se contabiliza como deuda porque el período todavía no empezó.
+        // (*) Esa cuota se usa para controlar vencimientos de cuotas y creación de nuevas cuotas.
+        public static List<Cuota> BuscarCuotasAdeudadas(int idSocio, string FechaHoy = "" )
         {
             List<Cuota> lista = new List<Cuota>();
 
             string FiltroFecha = "";
-            if (Fecha!= "")
+            if (FechaHoy != "")
             {
-                DateTime fecha = DateTime.ParseExact(Fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                // Convertir al formato yyyy-MM-dd
-                string fechaFormateada = fecha.ToString("yyyy-MM-dd");
-                FiltroFecha = $" AND cuota.FechaInicio <= '{fechaFormateada}'";
+                FiltroFecha = $" AND cuota.FechaInicio <= '{FechaHoy}'";
             }
 
-            string query = $@"
+           string query = $@"
                 SELECT cuota.idCuota, cuota.NumeroCuota, socios.idSocio, socios.Nombre, socios.Apellido, socios.Dni, 
 	                IF(cuota.FechaInicio='0000-00-00', NULL, cuota.FechaInicio) AS FechaInicio,
                     IF(cuota.FechaFin='0000-00-00', NULL, cuota.FechaFin) AS FechaFin,
@@ -90,7 +91,9 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             return lista;
         }
 
-        // Método para pagar Cuotas
+        // Método para pagar un listado de Cuotas.
+        // Los parámetros identifican el método en que se pagaron las cuotas.
+        // Y si financiaron el pago. Por defecto pagan todo en un solo pago.
         public static float PagarCuotas(List<Cuota> Cuotas, string metodoPago, string CantCuotaFinanciada = "1")
         {
             float TotalCuotasAbonadas = 0;
@@ -98,12 +101,15 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             {
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
+                    // Abro la conexión a la base de Datos.
+                    // Declaro e inicializo las variables a utilizar.
                     conn.Open();
-                    int ulimaNumeroCuota = 0;
+                    int ultimaNumeroCuota = 0;
                     string UltimaCuotaVigente = "N";
                     DateTime? ultimoFechaFin = null;
                     int idSocio = 0;
                     
+                    // Recorremos el listado de Cuotas y las actualizamos a PAGA con todos los datos adicionales.
                     foreach (Cuota cuota in Cuotas)
                     {
                         TotalCuotasAbonadas = + cuota.Monto;
@@ -127,24 +133,25 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                             cmd.ExecuteNonQuery();
                         }
 
-                        ulimaNumeroCuota = cuota.NumeroCuota;
+                        ultimaNumeroCuota = cuota.NumeroCuota;
                         UltimaCuotaVigente = cuota.Vigente;
                         idSocio = cuota.IdSocio;
                         ultimoFechaFin = cuota.FechaFin;
                     }
 
-                    // si esta pagando la ultima cuota vigente
+                    // Si esta pagando la ultima cuota vigente.
+                    // Por error no se creo la cuota futura.
+                    // Entonces le creo la cuota del período futuro.
                     if (UltimaCuotaVigente == "S")
                     {
-                        // busco si tiene deuda,
-                        // si no tiene deuda cambio Habilitado = S al Socio 
-                        // y creo una nueva cuota para el siguiente periodo
+                        // Busco si tiene deuda por las dudas.
+                        // Si no tiene deuda, creo una nueva cuota para el siguiente periodo
                         List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
                         if (cuotasAdeudadas == null || cuotasAdeudadas.Count == 0)
                         {
-                            ulimaNumeroCuota ++;
-                            DateTime NuevaFechaInicio = ultimoFechaFin.Value.AddDays(1);
-                            DateTime NuevaFechaFin= NuevaFechaInicio.AddDays(30);
+                            ultimaNumeroCuota++;
+                            DateTime? NuevaFechaInicio = ultimoFechaFin;
+                            DateTime NuevaFechaFin = NuevaFechaInicio.Value.AddMonths(1);
                             string insertQuery = @"
                                 INSERT INTO cuota
                                     (idSocio, NumeroCuota,  FechaInicio, FechaFin, Vigente, Estado)
@@ -154,19 +161,33 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                             using (MySqlCommand cmdInsert = new MySqlCommand(insertQuery, conn))
                             {
                                 cmdInsert.Parameters.AddWithValue("@idSocio", idSocio);
-                                cmdInsert.Parameters.AddWithValue("@NumeroCuota", ulimaNumeroCuota);
+                                cmdInsert.Parameters.AddWithValue("@NumeroCuota", ultimaNumeroCuota);
                                 cmdInsert.Parameters.AddWithValue("@FechaInicio", NuevaFechaInicio);
                                 cmdInsert.Parameters.AddWithValue("@FechaFin", NuevaFechaFin);
                                 cmdInsert.ExecuteNonQuery();
                             }
-
-                            // Actualizo Habilitado S el socio
-                            Socio SocioCuota = new();
-                            string error = "";
-                            SocioCuota.ActualizarDatosSocio(idSocio, "", out error);
                         }
                     }
-                    MessageBox.Show("Todas las cuotas fueron actualizadas correctamente.",
+                    // Busco deuda del Socio para determinar si está Habilitado luego de pagar las cuotas.
+                    string Habilitado = "N";
+                    string Estado = "Inhabilitado";
+                    string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
+                    List<Cuota> cuotasAdeudadasHoy = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+                    if (cuotasAdeudadasHoy == null || cuotasAdeudadasHoy.Count == 0)
+                    {
+                        Habilitado = "S";
+                        Estado = "Habilitado";
+                    }
+                    // Actualizo Habilitado del socio de acuerdo a si debe cuotas o no.
+                    // Creo la instancia del Socio y uso sus métodos.
+                    Socio SocioCuota = new();
+                    string error = "";
+                    SocioCuota.ActualizarDatosSocio(idSocio, Habilitado, out error);
+                    
+                    string Mensaje = $"Todas las cuotas fueron actualizadas correctamente. " +
+                                     $"El Socio Nro: {idSocio}, está {Estado} para el Ingreso al Club";
+
+                    MessageBox.Show(Mensaje,
                                     "Pago exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -180,16 +201,17 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
 
 
-        // Método para mostrar una descripción de la cuota en el ComboBox
+        // Método para mostrar una descripción de la cuota en el ComboBox.
        public override string ToString()
        {
             string fechaInicioStr = FechaInicio.HasValue ? FechaInicio.Value.ToShortDateString() : "Sin fecha";
             return $"Cuota {NumeroCuota} - Importe: {Monto} - Periodo: {fechaInicioStr} ";
        }
 
-        // Crea al Socio un año de cuotas para pagar por adelantado
+        // Crea un año de cuotas y las paga por adelantado al Socio.
         public static float CrearUnAnioDeCuotasPagas(int idSocio, string metodoPago, string CantCuotaFinanciada = "1")
         {
+            // Obtengo la cuota futura del próximo período.
             float TotalCuotasAbonadas = 0;
             List<Cuota> listaCuotasFuturas = new List<Cuota>();
             string query = @"
@@ -213,13 +235,15 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     int idCuota = 0;
                     float Monto  = 0;
 
-                    // --- 1. Leer datos y llenar lista ---
+                    // Leer datos y llenar lista
                     using (MySqlCommand cmd = new MySqlCommand(query, conn))
                     {
                         cmd.Parameters.AddWithValue("@idSocio", idSocio);
 
                         using (MySqlDataReader reader = cmd.ExecuteReader())
                         {
+                            // Recorro el resultado de la consulta a la base de datos.
+                            // Creo una instancia de la cuota y la agrego a la lista.
                             while (reader.Read())
                             {
                                 Cuota cuota = new Cuota
@@ -237,6 +261,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                                 };
                                 listaCuotasFuturas.Add(cuota);
 
+                                // Guardo en variables los datos que me permiten continuar las cuotas para el Socio.
                                 ultimaNumeroCuota = cuota.NumeroCuota;
                                 ultimoFechaFin = cuota.FechaFin;
                                 idCuota = cuota.IdCuota;
@@ -247,11 +272,11 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
                     if (listaCuotasFuturas.Count == 0)
                     {
-                        MessageBox.Show("No se encontraron cuotas futuras vigentes para este socio.",
+                        MessageBox.Show("No se encontraron cuotas futuras para este Socio.",
                                         "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    // --- 2. Actualizar la última cuota vigente a "Paga" ---
+                    // Actualizar la última cuota vigente a "Paga" junto con la info adicional.
                     string updateQuery = @"
                         UPDATE cuota 
                         SET FechaPago = @FechaPago,
@@ -273,7 +298,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     // Sumo al total abonado la primer cuota.
                     TotalCuotasAbonadas =+ Monto;
 
-                    // --- 3. Crear 11 cuotas pagas adicionales ---
+                    // Crear 11 cuotas pagas adicionales, porque ya tengo la primera creada.
                     DateTime? fechaInicioNueva = ultimoFechaFin;
                     int numeroCuota = ultimaNumeroCuota;
                     
@@ -305,7 +330,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         fechaInicioNueva = fechaFinNueva;
                     }
 
-                    // --- 4. Crear última cuota impaga y vigente ---
+                    // Creo una última cuota impaga y vigente para el futuro período y seguir con la lógica.
                     numeroCuota++;
                     DateTime fechaFinFinal = fechaInicioNueva.Value.AddMonths(1);
 
@@ -325,10 +350,18 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         cmdUltima.Parameters.AddWithValue("@Vigente", "S");
                         cmdUltima.ExecuteNonQuery();
                     }
-
-                    MessageBox.Show("Todas las cuotas fueron actualizadas correctamente.",
-                                    "Pago Anual exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                // Actualizo al Socio al Estado Habilitado = S, ya que pago un año adelantado.
+                // Creo la instancia del Socio y uso sus métodos.
+                Socio SocioCuota = new();
+                string error = "";
+                SocioCuota.ActualizarDatosSocio(idSocio, "S", out error);
+
+                string Mensaje = $"Todas las cuotas fueron actualizadas correctamente." +
+                                 $" El Socio Nro: {idSocio}, está Habilitado para el Ingreso al Club";
+                MessageBox.Show(Mensaje,
+                                    "Pago exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception ex)
             {

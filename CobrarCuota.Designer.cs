@@ -63,6 +63,7 @@
             button2 = new Button();
             labelComboCuotas = new Label();
             BtnPagarCuota = new Button();
+            buttonLimpiarBusqueda = new Button();
             header.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -98,6 +99,7 @@
             // 
             groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             groupBox2.BackColor = Color.FromArgb(232, 239, 249);
+            groupBox2.Controls.Add(buttonLimpiarBusqueda);
             groupBox2.Controls.Add(txtHabilitado);
             groupBox2.Controls.Add(label5);
             groupBox2.Controls.Add(textNumeroSocio);
@@ -170,7 +172,7 @@
             BuscarDeuda.FlatStyle = FlatStyle.Flat;
             BuscarDeuda.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             BuscarDeuda.ForeColor = Color.White;
-            BuscarDeuda.Location = new Point(181, 254);
+            BuscarDeuda.Location = new Point(311, 254);
             BuscarDeuda.Name = "BuscarDeuda";
             BuscarDeuda.Size = new Size(188, 40);
             BuscarDeuda.TabIndex = 10;
@@ -508,6 +510,22 @@
             BtnPagarCuota.Visible = false;
             BtnPagarCuota.Click += PagarCuota_Click;
             // 
+            // buttonLimpiarBusqueda
+            // 
+            buttonLimpiarBusqueda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonLimpiarBusqueda.BackColor = Color.FromArgb(176, 196, 222);
+            buttonLimpiarBusqueda.FlatAppearance.BorderSize = 0;
+            buttonLimpiarBusqueda.FlatStyle = FlatStyle.Flat;
+            buttonLimpiarBusqueda.Font = new Font("Segoe UI", 9F);
+            buttonLimpiarBusqueda.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonLimpiarBusqueda.Location = new Point(83, 250);
+            buttonLimpiarBusqueda.Name = "buttonLimpiarBusqueda";
+            buttonLimpiarBusqueda.Size = new Size(188, 44);
+            buttonLimpiarBusqueda.TabIndex = 15;
+            buttonLimpiarBusqueda.Text = "Limpiar Campos";
+            buttonLimpiarBusqueda.UseVisualStyleBackColor = false;
+            buttonLimpiarBusqueda.Click += buttonLimpiarBusqueda_Click;
+            // 
             // CobrarCuota
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -570,5 +588,6 @@
         private RadioButton radio6Cuotas;
         private CheckBox checkBoxAbonarAnio;
         private Label labelAbonarAnio;
+        private Button buttonLimpiarBusqueda;
     }
 }

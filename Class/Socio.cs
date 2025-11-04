@@ -126,12 +126,13 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     conn.Open();
                     string SQL = @" 
                                     UPDATE socios
-                                    SET Habilitado = 'S'
+                                    SET Habilitado = @Habilitado
                                     WHERE socios.idSocio = @idSocio";
 
                     using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
                     {
                         cmd.Parameters.AddWithValue("@idSocio", idSocio);
+                        cmd.Parameters.AddWithValue("@Habilitado", DatosActualizar);
                         cmd.ExecuteNonQuery();
 
                         error = string.Empty;

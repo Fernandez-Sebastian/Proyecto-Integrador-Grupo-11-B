@@ -1,7 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using Proyecto_Integrador_Grupo_11_B.Class;
-using System.Net;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using Proyecto_Integrador_Grupo_11_B.Class;
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
@@ -12,6 +9,8 @@ namespace Proyecto_Integrador_Grupo_11_B
             InitializeComponent();
         }
 
+        // Método para buscar un Socio por su DNI.
+        // Si lo encuentra completa los campos con sus datos.
         private void BuscarSocio_Click(object sender, EventArgs e)
         {
             try
@@ -43,6 +42,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             }
         }
 
+        // Método para volver al menú anterior.
         private void VolverMenu_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -58,13 +58,14 @@ namespace Proyecto_Integrador_Grupo_11_B
             }
         }
 
+        // Método para buscar la deuda del Socio.
         private void BuscarDeuda_Click(object sender, EventArgs e)
         {
-            //Muestro el boton de pagar cuota
+            //Muestro el boton de pagar cuota.
             BtnPagarCuota.Visible = true;
 
-            // Si se desea hacer una búsqueda sin salir de la pantalla, 
-            // reinicio los estados de ocultoo visible de cada elemento.
+            // vuelvo al estado inciial cada elemento del formulario.
+            // Para que se reinicien si hay muchas búsquedas.
             labelAbonarAnio.Visible = false;
             checkBoxAbonarAnio.Visible = false;
             checkBoxAbonarTodo.Visible = true;
@@ -72,37 +73,37 @@ namespace Proyecto_Integrador_Grupo_11_B
             labelComboCuotas.Visible = true;
             labelTodasCuotasAdeudadas.Visible = true;
 
-            // Validar que el número de socio no esté vacío
+            // Validar que el número de socio no esté vacío.
+            // Es decir, ya se realizó la búsqueda del Socio previamente.
             if (string.IsNullOrWhiteSpace(textNumeroSocio.Text))
             {
+                BtnPagarCuota.Visible = false;
                 MessageBox.Show("Debe buscar un Socio antes de consultar la deuda.",
                                 "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Bloquear el campo DNI para que no se pueda modificar
+            // Bloquear el campo DNI para que no se pueda modificar una vez se realizó la búsqueda.
+            // Declaración de variables que utilizaremos.
             txtDni.Enabled = false;
             string Apellido = txtApellido.Text;
             string Nombre = txtNombre.Text;
-
-            // Guardar el idSocio en una variable
             int idSocio = int.Parse(textNumeroSocio.Text);
 
-            // Limpiar ComboBox antes de llenar
+            // Limpiar ComboBox antes de llenar con las cuotas a pagar.
             comboBoxCuotas.Items.Clear();
+            
+            // Obtenemos la deuda de cuotas del Socio.
+            string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
+            List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
 
-            // Obtener la lista de cuotas adeudadas hasta el periodo en curso,
-            // sin contar cuotas futuras
-
-            string ultimoDiaPeriodo = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)).ToString("dd/MM/yyyy");
-            List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, ultimoDiaPeriodo);
-
-            // si no adeuda nada, habilito para que pague un año futuro.
-            // si adeuda cuota, cargo el combo con ese listado de cuotas,
-            // oculto la posibilidad de pagar un año adelantado 
-            // muestro la posibilidad de pagar toda la deuda completa
+            // (*) Si no adeuda nada, habilito para que pague un año futuro.
+            // (**) Si adeuda una cuota o mas cuotas, cargo el combo con ese listado de cuotas.
+            // (**) Oculto la posibilidad de pagar un año adelantado 
+            // (**) Habilito la posibilidad de pagar toda la deuda completa.
             if (cuotasAdeudadas == null || cuotasAdeudadas.Count == 0)
             {
+                // Si no adeuda cuotas muestro el mensaje.
                 MessageBox.Show($"No se registran deudas para el socio {Apellido}, {Nombre}.",
                                 "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -110,7 +111,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 labelAbonarAnio.Visible = true;
                 checkBoxAbonarAnio.Visible = true;
 
-                //oculto todos los botones de pagos de cuotas vencidas
+                // Oculto todos los botones de pagos de cuotas vencidas porque no tiene.
                 checkBoxAbonarTodo.Visible = false;
                 comboBoxCuotas.Visible = false;
                 labelComboCuotas.Visible = false;
@@ -118,21 +119,22 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                 return;
             }
-            
-            // Llenar ComboBox con el listado de cuotas adeudadas
+
+            // Llenar ComboBox con el listado de cuotas adeudadas.
             foreach (Cuota c in cuotasAdeudadas)
             {
                 comboBoxCuotas.Items.Add(c);
             }
 
-            // Selecciono la primera cuota
+            // Selecciono la primera cuota de la lista.
             if (comboBoxCuotas.Items.Count > 0)
                 comboBoxCuotas.SelectedIndex = 0;
         }
 
+        // Método que se ejecuta al capturar el evento de click sobre el btn Pagar Cuota.
         private void PagarCuota_Click(object sender, EventArgs e)
         {
-            // Determinar si se abonarán todas las cuotas o solo una o todo el año
+            // Declaración de las variables que utilizaremos.
             bool abonarTodas = checkBoxAbonarTodo.Checked;
             bool abonarAnio = checkBoxAbonarAnio.Checked;
             bool pagaUnaCuota = false;
@@ -141,9 +143,10 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             Cuota cuotaSeleccionada = null;
 
+            // Si no abona todo el año y no abona toda la deuda, es porque paga una sola cuota.
+            // Valido que haya elegido una cuota.
             if (!abonarTodas && !abonarAnio)
             {
-                // Si no se abonan todas, debe haber una cuota seleccionada
                 if (comboBoxCuotas.SelectedItem == null)
                 {
                     MessageBox.Show("Debe seleccionar una cuota a abonar.",
@@ -151,12 +154,12 @@ namespace Proyecto_Integrador_Grupo_11_B
                     return;
                 }
 
-                // Obtener la cuota seleccionada del ComboBox
+                // Obtener la cuota seleccionada del ComboBox.
                 cuotaSeleccionada = (Cuota)comboBoxCuotas.SelectedItem;
                 pagaUnaCuota = true;
             }
 
-            // Determinar método de pago
+            // Determinar método de pago seleccionado.
             string metodoPago = "";
             GroupCantidadDeCuotas.Visible = false;
             if (radioEfectivo.Checked)
@@ -174,7 +177,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 return;
             }
 
-            //Valdiaciones para pago con tarjeta
+            // Validaciones para cuando el método de pago es con tarjeta.
             string cantidadCuotaFinanciada = "1";
             if (radioTarjeta.Checked)
             {
@@ -192,7 +195,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
             }
 
-            // Confirmar los datos del pago antes de continuar
+            // Confirmar los datos antes de continuar.
 
             DialogResult confirmar = MessageBox.Show(
                 "\n\n¿Desea confirmar el pago?",
@@ -203,13 +206,17 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             if (confirmar == DialogResult.No)
                 return;
-          
-            string ultimoDiaPeriodo = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month)).ToString("dd/MM/yyyy");
+
+            // Declaración de variables para ejecutar el pago.
+            string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
             float TotalPago = 0;
-            // Accion para pagar el año.
+
+            // Accion para pagar el año adelantado.
+            // Valido que no tenga deuda.
+            // Pago todas un año y cuento el total abonado.
             if (abonarAnio)
             {
-                List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, ultimoDiaPeriodo);
+                List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
                 if (cuotasAdeudadas == null || cuotasAdeudadas.Count == 0)
                 {
                     CantCuotas = 12;
@@ -217,14 +224,14 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
             }
 
-            // Accion cuando paga todas las cuotas adeudada o una cuota específica.
-            // Genero la lista de cuotas y las pago en la clase cuota.
+            // Acción cuando paga todas las cuotas adeudada o una cuota específica adeudada.
+            // Genero la lista de cuotas A Pagar y las abono en el método, en la clase Cuota.
             if (abonarTodas || pagaUnaCuota)
             {
                 List<Cuota> cuotasAPagar = new List<Cuota>();
 
                 if (abonarTodas)
-                    cuotasAPagar = Cuota.BuscarCuotasAdeudadas(idSocio, ultimoDiaPeriodo);
+                    cuotasAPagar = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
                 else
                     cuotasAPagar.Add(cuotaSeleccionada);
 
@@ -232,13 +239,10 @@ namespace Proyecto_Integrador_Grupo_11_B
                 TotalPago = Cuota.PagarCuotas(cuotasAPagar, metodoPago, cantidadCuotaFinanciada);
             }
 
-            // Simular el pago (más adelante irá la lógica de actualización en la BD)
-            MessageBox.Show("Pago realizado con éxito.\n\n(Próximamente se abrirá el comprobante de pago para poder imprimirlo).",
-                            "Pago confirmado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            // Llegado acá ya se generó el pago de la o las cuotas.
             // Antes de crear el comprobante de pago, le cambio el estado al Socio Habilitado S/N según corresponda.
             List<Cuota> adeudaCuotas = new List<Cuota>();
-            adeudaCuotas = Cuota.BuscarCuotasAdeudadas(idSocio, ultimoDiaPeriodo);
+            adeudaCuotas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
 
             string Habilitado = "N";
             if (adeudaCuotas == null || adeudaCuotas.Count == 0)
@@ -251,7 +255,8 @@ namespace Proyecto_Integrador_Grupo_11_B
             Socio ActualizarSocio = new();
             ActualizarSocio.ActualizarDatosSocio(idSocio, Habilitado, out error);
 
-            // Crear el comprobante (objeto de datos)
+            // Crear el comprobante con una instancia de la clase ComprobanteDePagoCuotaSocio.
+            // Que hereda de la clase ComprobanteDePago.
             string Apellido = txtApellido.Text;
             string Nombre = txtNombre.Text;
             string Dni = txtDni.Text.Trim();
@@ -269,7 +274,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 metodoPago
             );
 
-            //Mostrar formulario visual del comprobante
+            // Mostrar formulario visual del comprobante.
             ComprobantePagoCuotaSocio ComprobanteCuotaSocio = new ComprobantePagoCuotaSocio(comprobante);
             ComprobanteCuotaSocio.ShowDialog();
             //this.Close();
@@ -277,19 +282,49 @@ namespace Proyecto_Integrador_Grupo_11_B
 
         }
 
+        // Captura de evento para manejo del group de cuotas.
         private void radioTarjeta_CheckedChanged(object sender, EventArgs e)
         {
             GroupCantidadDeCuotas.Visible = true;
         }
 
+        // Captura de evento para manejo del group de cuotas.
         private void radioEfectivo_CheckedChanged(object sender, EventArgs e)
         {
             GroupCantidadDeCuotas.Visible = false;
         }
 
+        // Captura de evento para manejo del group de cuotas.
         private void radioTransferencia_CheckedChanged(object sender, EventArgs e)
         {
             GroupCantidadDeCuotas.Visible = false;
+        }
+
+        // Boton para limpiar campos del formulario.
+        private void buttonLimpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            // Blanqueo los campos de la búsqueda del Socio.
+            textNumeroSocio.Text = "";
+            txtNombre.Text = "";
+            txtApellido.Text = "";
+            txtHabilitado.Text = "";
+            txtDni.Text = "";
+            
+            // Blanqueo los campos de opciones de pago.
+            checkBoxAbonarAnio.Checked = false;
+            checkBoxAbonarTodo.Checked = false;
+            comboBoxCuotas.Items.Clear();
+
+            // Blanqueo las opciones de los métodos de pago
+            radioTransferencia.Checked = false;
+            radioTarjeta.Checked = false;
+            radioEfectivo.Checked = false;
+            radio6Cuotas.Checked = false;
+            radio3Cuotas.Checked = false;
+            
+            // Oculto el botón de pagar cuota y habilito el campo DNI para buscar otro DNI.
+            txtDni.Enabled = true;
+            BtnPagarCuota.Visible = false;
         }
     }
 }
