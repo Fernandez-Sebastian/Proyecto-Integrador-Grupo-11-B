@@ -32,9 +32,18 @@ namespace Proyecto_Integrador_Grupo_11_B
             LblCuotaTarjeta.Text = _comprobante.CantCuotasFinanciada.ToString();
             LblCuotaAbonada.Text = _comprobante.CantCuotasPagadas.ToString();
 
-            panelComprobanteCompleto.Dock = DockStyle.Fill;
-            panelComprobanteCompleto.BackColor = Color.White;
-            panelComprobanteCompleto.Invalidate();
+            // Si pagó en cuotas mostramos el precio de cada cuota.
+            labelDescripcionPrecioPorCuota.Visible = false;
+            labelPrecioCuota.Visible = false;
+            if (_comprobante.MedioDePago == "Tarjeta")
+            {
+                double cuotasFinanciadas = Convert.ToDouble(_comprobante.CantCuotasFinanciada);
+                double precioPorCuota = _comprobante.Precio / cuotasFinanciadas;
+                labelDescripcionPrecioPorCuota.Text = "El precio de cada cuota es";
+                labelPrecioCuota.Text = $"${precioPorCuota:F2}";
+                labelDescripcionPrecioPorCuota.Visible = true;
+                labelPrecioCuota.Visible = true;
+            }
 
         }
 

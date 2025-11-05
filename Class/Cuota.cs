@@ -108,12 +108,13 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     string UltimaCuotaVigente = "N";
                     DateTime? ultimoFechaFin = null;
                     int idSocio = 0;
+                    float Monto = 45000;
                     
                     // Recorremos el listado de Cuotas y las actualizamos a PAGA con todos los datos adicionales.
                     foreach (Cuota cuota in Cuotas)
                     {
-                        TotalCuotasAbonadas = + cuota.Monto;
-                        
+                        TotalCuotasAbonadas += Monto;
+
                         string query = @"
                             UPDATE cuota
                             SET 
@@ -184,7 +185,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     string error = "";
                     SocioCuota.ActualizarDatosSocio(idSocio, Habilitado, out error);
                     
-                    string Mensaje = $"Todas las cuotas fueron actualizadas correctamente. " +
+                    string Mensaje = $"Cuotas abonadas correctamente. " +
                                      $"El Socio Nro: {idSocio}, está {Estado} para el Ingreso al Club";
 
                     MessageBox.Show(Mensaje,
@@ -296,7 +297,8 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     }
 
                     // Sumo al total abonado la primer cuota.
-                    TotalCuotasAbonadas =+ Monto;
+                    TotalCuotasAbonadas += Monto;
+
 
                     // Crear 11 cuotas pagas adicionales, porque ya tengo la primera creada.
                     DateTime? fechaInicioNueva = ultimoFechaFin;
@@ -326,7 +328,8 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                             cmdInsert.Parameters.AddWithValue("@Vigente", "N");
                             cmdInsert.ExecuteNonQuery();
                         }
-                        TotalCuotasAbonadas = +Monto;
+                        TotalCuotasAbonadas += Monto;
+
                         fechaInicioNueva = fechaFinNueva;
                     }
 
@@ -357,7 +360,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 string error = "";
                 SocioCuota.ActualizarDatosSocio(idSocio, "S", out error);
 
-                string Mensaje = $"Todas las cuotas fueron actualizadas correctamente." +
+                string Mensaje = $"Se ha abonado un año por anticipado." +
                                  $" El Socio Nro: {idSocio}, está Habilitado para el Ingreso al Club";
                 MessageBox.Show(Mensaje,
                                     "Pago exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);

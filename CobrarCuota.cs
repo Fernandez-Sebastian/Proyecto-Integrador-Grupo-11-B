@@ -250,6 +250,9 @@ namespace Proyecto_Integrador_Grupo_11_B
                 Habilitado = "S";
             }
 
+            // Actualizo el campo Habilitado del socio en el Formulario.
+            txtHabilitado.Text = Habilitado;
+
             // Actualizo el Estado del Socio.
             string error = "";
             Socio ActualizarSocio = new();
@@ -274,12 +277,29 @@ namespace Proyecto_Integrador_Grupo_11_B
                 metodoPago
             );
 
+            // Antes de abrir el comprobante de pago.
+            // Oculto todos los botones del formulario.
+            // Para no generar inconvenientes al volver al formulario.
+            // También bloqueamos los elementos para que n ose pueda interactuar.
+            BtnPagarCuota.Visible = false;
+            buttonLimpiarBusqueda.Visible = false;
+            BuscarSocio.Visible = false;
+            BuscarDeuda.Visible = false;
+
+            checkBoxAbonarTodo.Enabled = false;
+            checkBoxAbonarAnio.Enabled = false;
+            comboBoxCuotas.Enabled = false;
+
+            radioEfectivo.Enabled = false;
+            radioTarjeta.Enabled = false;
+            radioTransferencia.Enabled = false;
+            radio3Cuotas.Enabled = false;
+            radio6Cuotas.Enabled = false;
+
+
             // Mostrar formulario visual del comprobante.
             ComprobantePagoCuotaSocio ComprobanteCuotaSocio = new ComprobantePagoCuotaSocio(comprobante);
             ComprobanteCuotaSocio.ShowDialog();
-            //this.Close();
-
-
         }
 
         // Captura de evento para manejo del group de cuotas.
