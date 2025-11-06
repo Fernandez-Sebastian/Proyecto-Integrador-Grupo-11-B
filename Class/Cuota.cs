@@ -33,7 +33,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             string FiltroFecha = "";
             if (FechaHoy != "")
             {
-                FiltroFecha = $" AND cuota.FechaInicio <= '{FechaHoy}'";
+              //  FiltroFecha = $" AND cuota.FechaInicio <= '{FechaHoy}'";
             }
 
            string query = $@"
@@ -139,36 +139,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         idSocio = cuota.IdSocio;
                         ultimoFechaFin = cuota.FechaFin;
                     }
-
-                    // Si esta pagando la ultima cuota vigente.
-                    // Por error no se creo la cuota futura.
-                    // Entonces le creo la cuota del período futuro.
-                    if (UltimaCuotaVigente == "S")
-                    {
-                        // Busco si tiene deuda por las dudas.
-                        // Si no tiene deuda, creo una nueva cuota para el siguiente periodo
-                        List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
-                        if (cuotasAdeudadas == null || cuotasAdeudadas.Count == 0)
-                        {
-                            ultimaNumeroCuota++;
-                            DateTime? NuevaFechaInicio = ultimoFechaFin;
-                            DateTime NuevaFechaFin = NuevaFechaInicio.Value.AddMonths(1);
-                            string insertQuery = @"
-                                INSERT INTO cuota
-                                    (idSocio, NumeroCuota,  FechaInicio, FechaFin, Vigente, Estado)
-                                    VALUES
-                                    (@idSocio, @NumeroCuota, @FechaInicio, @FechaFin, 'S', 'Impaga')";
-
-                            using (MySqlCommand cmdInsert = new MySqlCommand(insertQuery, conn))
-                            {
-                                cmdInsert.Parameters.AddWithValue("@idSocio", idSocio);
-                                cmdInsert.Parameters.AddWithValue("@NumeroCuota", ultimaNumeroCuota);
-                                cmdInsert.Parameters.AddWithValue("@FechaInicio", NuevaFechaInicio);
-                                cmdInsert.Parameters.AddWithValue("@FechaFin", NuevaFechaFin);
-                                cmdInsert.ExecuteNonQuery();
-                            }
-                        }
-                    }
+                   
                     // Busco deuda del Socio para determinar si está Habilitado luego de pagar las cuotas.
                     string Habilitado = "N";
                     string Estado = "Inhabilitado";
@@ -280,24 +251,17 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     // Actualizar la última cuota vigente a "Paga" junto con la info adicional.
                     string updateQuery = @"
                         UPDATE cuota 
-                        SET FechaPago = @FechaPago,
-                            MetodoPago = @MetodoPago,
-                            Vigente = 'N',
-                            CantidadCuotaFinanciada = @CantCuotaFinanciada,
-                            Estado = 'Paga'
+                        SET Vigente = 'N'
                         WHERE idCuota = @idCuota";
 
                     using (MySqlCommand cmdUpdate = new MySqlCommand(updateQuery, conn))
                     {
-                        cmdUpdate.Parameters.AddWithValue("@FechaPago", DateTime.Now.Date);
-                        cmdUpdate.Parameters.AddWithValue("@MetodoPago", metodoPago);
-                        cmdUpdate.Parameters.AddWithValue("@CantCuotaFinanciada", CantCuotaFinanciada);
                         cmdUpdate.Parameters.AddWithValue("@idCuota", idCuota);
                         cmdUpdate.ExecuteNonQuery();
                     }
 
-                    // Sumo al total abonado la primer cuota.
-                    TotalCuotasAbonadas += Monto;
+                    //// Sumo al total abonado la primer cuota.
+                    //TotalCuotasAbonadas += Monto;
 
 
                     // Crear 11 cuotas pagas adicionales, porque ya tengo la primera creada.
@@ -333,7 +297,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         fechaInicioNueva = fechaFinNueva;
                     }
 
-                    // Creo una última cuota impaga y vigente para el futuro período y seguir con la lógica.
+                    //// Creo una última cuota impaga y vigente para el futuro período y seguir con la lógica.
                     numeroCuota++;
                     DateTime fechaFinFinal = fechaInicioNueva.Value.AddMonths(1);
 
@@ -349,7 +313,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         cmdUltima.Parameters.AddWithValue("@NumeroCuota", numeroCuota);
                         cmdUltima.Parameters.AddWithValue("@FechaInicio", fechaInicioNueva);
                         cmdUltima.Parameters.AddWithValue("@FechaFin", fechaFinFinal);
-                        cmdUltima.Parameters.AddWithValue("@Estado", "Impaga");
+                        cmdUltima.Parameters.AddWithValue("@Estado", "Paga");
                         cmdUltima.Parameters.AddWithValue("@Vigente", "S");
                         cmdUltima.ExecuteNonQuery();
                     }
