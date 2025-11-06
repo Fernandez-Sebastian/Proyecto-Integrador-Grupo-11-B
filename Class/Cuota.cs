@@ -21,20 +21,10 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
 
 
-        // Método para buscar cuotas adeudadas por idSocio y la fecha de hoy.
-        // Filtramos todas las cuotas adeudadas que son menor o igual a la fecha de hoy.
-        // (*) El manejo de las cuotas va a ser que SIEMPRE va a tener una cuota IMPAGA del proximo período.
-        // (*) Esa cuota no se contabiliza como deuda porque el período todavía no empezó.
-        // (*) Esa cuota se usa para controlar vencimientos de cuotas y creación de nuevas cuotas.
-        public static List<Cuota> BuscarCuotasAdeudadas(int idSocio, string FechaHoy = "" )
+        // Método para buscar cuotas adeudadas por idSocio.
+        public static List<Cuota> BuscarCuotasAdeudadas(int idSocio)
         {
             List<Cuota> lista = new List<Cuota>();
-
-            string FiltroFecha = "";
-            if (FechaHoy != "")
-            {
-              //  FiltroFecha = $" AND cuota.FechaInicio <= '{FechaHoy}'";
-            }
 
            string query = $@"
                 SELECT cuota.idCuota, cuota.NumeroCuota, socios.idSocio, socios.Nombre, socios.Apellido, socios.Dni, 
@@ -45,7 +35,6 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 FROM cuota 
                 INNER JOIN socios ON (socios.idSocio = cuota.idSocio)
                 WHERE cuota.idSocio = @idSocio AND cuota.Estado = 'Impaga'
-                {FiltroFecha}
                 ORDER BY cuota.FechaInicio ASC";
 
             try
@@ -143,8 +132,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     // Busco deuda del Socio para determinar si está Habilitado luego de pagar las cuotas.
                     string Habilitado = "N";
                     string Estado = "Inhabilitado";
-                    string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
-                    List<Cuota> cuotasAdeudadasHoy = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+                    List<Cuota> cuotasAdeudadasHoy = Cuota.BuscarCuotasAdeudadas(idSocio);
                     if (cuotasAdeudadasHoy == null || cuotasAdeudadasHoy.Count == 0)
                     {
                         Habilitado = "S";
@@ -183,7 +171,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
         // Crea un año de cuotas y las paga por adelantado al Socio.
         public static float CrearUnAnioDeCuotasPagas(int idSocio, string metodoPago, string CantCuotaFinanciada = "1")
         {
-            // Obtengo la cuota futura del próximo período.
+            // Obtengo Última la cuota vigente.
             float TotalCuotasAbonadas = 0;
             List<Cuota> listaCuotasFuturas = new List<Cuota>();
             string query = @"
@@ -233,7 +221,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                                 };
                                 listaCuotasFuturas.Add(cuota);
 
-                                // Guardo en variables los datos que me permiten continuar las cuotas para el Socio.
+                                // Guardo en variables los datos que me permiten crear las 12 cuotas para el Socio.
                                 ultimaNumeroCuota = cuota.NumeroCuota;
                                 ultimoFechaFin = cuota.FechaFin;
                                 idCuota = cuota.IdCuota;
@@ -248,7 +236,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                                         "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
-                    // Actualizar la última cuota vigente a "Paga" junto con la info adicional.
+                    // Actualizar la última cuota vigente a "Paga".
                     string updateQuery = @"
                         UPDATE cuota 
                         SET Vigente = 'N'
@@ -260,11 +248,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         cmdUpdate.ExecuteNonQuery();
                     }
 
-                    //// Sumo al total abonado la primer cuota.
-                    //TotalCuotasAbonadas += Monto;
-
-
-                    // Crear 11 cuotas pagas adicionales, porque ya tengo la primera creada.
+                    // Crear 11 cuotas pagas con vigente en N.
                     DateTime? fechaInicioNueva = ultimoFechaFin;
                     int numeroCuota = ultimaNumeroCuota;
                     
@@ -297,7 +281,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         fechaInicioNueva = fechaFinNueva;
                     }
 
-                    //// Creo una última cuota impaga y vigente para el futuro período y seguir con la lógica.
+                    // Creo la cuota 12 Paga y vigente.
                     numeroCuota++;
                     DateTime fechaFinFinal = fechaInicioNueva.Value.AddMonths(1);
 

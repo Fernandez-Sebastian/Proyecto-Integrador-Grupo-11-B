@@ -61,10 +61,10 @@ namespace Proyecto_Integrador_Grupo_11_B
         // Método para buscar la deuda del Socio.
         private void BuscarDeuda_Click(object sender, EventArgs e)
         {
-            //Muestro el boton de pagar cuota.
+            //Muestro el botón de pagar cuota.
             BtnPagarCuota.Visible = true;
 
-            // vuelvo al estado inciial cada elemento del formulario.
+            // vuelvo al estado inicial cada elemento del formulario.
             // Para que se reinicien si hay muchas búsquedas.
             labelAbonarAnio.Visible = false;
             checkBoxAbonarAnio.Visible = false;
@@ -94,8 +94,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             comboBoxCuotas.Items.Clear();
             
             // Obtenemos la deuda de cuotas del Socio.
-            string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
-            List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+            List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
 
             // (*) Si no adeuda nada, habilito para que pague un año futuro.
             // (**) Si adeuda una cuota o mas cuotas, cargo el combo con ese listado de cuotas.
@@ -208,7 +207,6 @@ namespace Proyecto_Integrador_Grupo_11_B
                 return;
 
             // Declaración de variables para ejecutar el pago.
-            string FechaHoy = DateTime.Now.ToString("yyyy-MM-dd");
             float TotalPago = 0;
 
             // Accion para pagar el año adelantado.
@@ -216,7 +214,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             // Pago todas un año y cuento el total abonado.
             if (abonarAnio)
             {
-                List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+                List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
                 if (cuotasAdeudadas == null || cuotasAdeudadas.Count == 0)
                 {
                     CantCuotas = 12;
@@ -231,7 +229,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 List<Cuota> cuotasAPagar = new List<Cuota>();
 
                 if (abonarTodas)
-                    cuotasAPagar = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+                    cuotasAPagar = Cuota.BuscarCuotasAdeudadas(idSocio);
                 else
                     cuotasAPagar.Add(cuotaSeleccionada);
 
@@ -242,7 +240,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             // Llegado acá ya se generó el pago de la o las cuotas.
             // Antes de crear el comprobante de pago, le cambio el estado al Socio Habilitado S/N según corresponda.
             List<Cuota> adeudaCuotas = new List<Cuota>();
-            adeudaCuotas = Cuota.BuscarCuotasAdeudadas(idSocio, FechaHoy);
+            adeudaCuotas = Cuota.BuscarCuotasAdeudadas(idSocio);
 
             string Habilitado = "N";
             if (adeudaCuotas == null || adeudaCuotas.Count == 0)
@@ -280,7 +278,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             // Antes de abrir el comprobante de pago.
             // Oculto todos los botones del formulario.
             // Para no generar inconvenientes al volver al formulario.
-            // También bloqueamos los elementos para que n ose pueda interactuar.
+            // También bloqueamos los elementos para que no se pueda interactuar.
             BtnPagarCuota.Visible = false;
             buttonLimpiarBusqueda.Visible = false;
             BuscarSocio.Visible = false;
