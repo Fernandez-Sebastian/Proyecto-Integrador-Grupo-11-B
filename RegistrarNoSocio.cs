@@ -12,7 +12,7 @@ namespace Proyecto_Integrador_Grupo_11_B
         private void VolverMenu_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                "¿Seguro que deseas volver al menú principal? Se cancelará el alta actual.",
+                "¿Seguro que deseas volver al menú principal?",
                 "Confirmar salida",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question
@@ -119,7 +119,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                 if (EstadoAlta == "OK")
                 {
-                    MessageBox.Show($"No Socio: {nombre} {apellido} registrado correctamente. Para realizar una actividad debe tener la cuota al día.");
+                    MessageBox.Show($"No Socio: {nombre} {apellido} registrado correctamente.");
                     this.Close();
                 }
                 else

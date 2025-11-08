@@ -46,7 +46,7 @@ namespace Proyecto_Integrador_Grupo_11_B
         private void VolverMenu_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-               "¿Seguro que deseas volver al menú principal? Se cancelará pago de cuota actual",
+               "¿Seguro que deseas volver al menú principal?",
                "Confirmar salida",
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Question
