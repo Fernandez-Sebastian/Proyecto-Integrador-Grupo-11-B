@@ -124,7 +124,6 @@ namespace Proyecto_Integrador_Grupo_11_B
                     socioNuevo = NuevoSocio;
                     ImprimirCarnet.Enabled = true;
                     MessageBox.Show($"\"Socio {nombre} {apellido} registrado correctamente. Para realizar una actividad debe tener la cuota al día.\"");
-                    this.Close();
                 }
                 else
                 {

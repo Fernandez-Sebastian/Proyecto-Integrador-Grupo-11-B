@@ -13,7 +13,7 @@ BEGIN
     (1, -- primera cuota
      NULL, -- FechaPago, nace vacía se genera al pagar
      CURDATE(), -- fecha de hoy
-     DATE_ADD(p_fecha, INTERVAL 1 MONTH), -- FechaFin, vence un mes después
+     DATE_ADD(CURDATE(), INTERVAL 1 MONTH), -- FechaFin, vence un mes después
      45000, -- monto fijo 15000
      NULL, -- método pago nace vacío, se genra al pagar
      'S', -- nace vigente

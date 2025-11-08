@@ -40,7 +40,7 @@ CREATE TABLE Socios (
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     FechaNacimiento DATE NOT NULL,
-    FechaAlta DATE NOT NULL DEFAULT current_timestamp,
+    FechaAlta DATE NOT NULL DEFAULT (CURDATE()),
     AptoMedico ENUM('S', 'N') NOT NULL DEFAULT 'N',
     Habilitado ENUM('S', 'N') NOT NULL DEFAULT 'N'
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
