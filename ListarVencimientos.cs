@@ -54,7 +54,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                     dataGridViewSociosDeudores.Rows[renglon].Cells[1].Value = sociosDeudores.GetString(1);  //Apellido
                     dataGridViewSociosDeudores.Rows[renglon].Cells[2].Value = sociosDeudores.GetString(2);  //Dni
                     dataGridViewSociosDeudores.Rows[renglon].Cells[3].Value = sociosDeudores.GetInt64(3);   //Cant Cuotas
-                    dataGridViewSociosDeudores.Rows[renglon].Cells[4].Value = sociosDeudores.GetDateTime(4);//Fecha vto cuota
+                    dataGridViewSociosDeudores.Rows[renglon].Cells[4].Value = sociosDeudores.GetDateTime(4).ToString("dd-MM-yyyy");//Fecha vto cuota
                     dataGridViewSociosDeudores.Rows[renglon].Cells[5].Value = sociosDeudores.GetDecimal(5); //Monto deuda
                 }
             }

@@ -13,10 +13,10 @@ BEGIN
 
   DROP TEMPORARY TABLE IF EXISTS tmp_socios_cuota;
   
-  -- Socios que les creo la cuota:
+  --  Socios que les creo la cuota:
   --  Tienen una cuota vigente cuyo fechafin es igual a la de hoy
   --  Tienen menos de 5 cuotas impagas en total, para no generarle más deuda
-  -- no tiene cuotas futuras pagas 
+  --  no tiene cuotas futuras pagas 
   CREATE TEMPORARY TABLE tmp_socios_cuota
   ENGINE=Memory
   AS
@@ -40,12 +40,12 @@ BEGIN
   GROUP BY s.idSocio;
 
   -- Si no hay cuotas a generar no hacemos nada
-  SELECT COUNT(*) INTO v_count FROM tmp_socios_elegibles;
+  SELECT COUNT(*) INTO v_count FROM tmp_socios_cuota;
   
   IF v_count > 0 THEN
 	-- Desactivar la cuota vigente actual del socio para que la nueva sea la vigente
 	UPDATE Cuota c
-	JOIN tmp_socios_elegibles t ON t.idSocio = c.IdSocio
+	JOIN tmp_socios_cuota t ON t.idSocio = c.IdSocio
 	SET c.Vigente = 'N'
 	WHERE c.Vigente = 'S'
     AND c.FechaFin = p_fecha;
@@ -64,12 +64,12 @@ BEGIN
 		'1',                         -- CantidadCuotaFinanciada
 		'Impaga',                    -- Estado, nace impaga
 		t.idSocio                    -- IdSocio
-	FROM tmp_socios_elegibles t;
+	FROM tmp_socios_cuota t;
   END IF;
 
   COMMIT;
 
-  DROP TEMPORARY TABLE tmp_socios_elegibles;
+  DROP TEMPORARY TABLE tmp_socios_cuota;
 END $$
 
 DELIMITER ;

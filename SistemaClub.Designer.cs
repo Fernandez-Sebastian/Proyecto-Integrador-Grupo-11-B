@@ -337,7 +337,7 @@
             actualizarButton.BackColor = Color.FromArgb(232, 239, 249);
             actualizarButton.Click += ActualizarButton_Click;
             actualizarButton.ForeColor = Color.FromArgb(74, 141, 248);
-            actualizarToolTip.SetToolTip(actualizarButton, "Actualizar el estado de los socios con vencimiento al día de hoy.");
+            actualizarToolTip.SetToolTip(actualizarButton, "Actualizar: ver si existen vencimientos al día de hoy.");
             // 
             // SistemaClub
             // 

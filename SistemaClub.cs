@@ -98,11 +98,13 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             if (reader.HasRows)
             {
-                resultMessage = "Existen socios cuya cuota vence el día de hoy, consultar el listado de vencimientos";
+                resultMessage = "Existen socios cuya cuota vence el día de hoy, consultar el listado de vencimientos.";
+                alertaVencimientosLabel.ForeColor = Color.Red;
             }
             else
             {
-                resultMessage = "No existen cuotas a vencer el día de hoy";
+                resultMessage = "No existen cuotas a vencer el día de hoy.";
+                alertaVencimientosLabel.ForeColor = Color.Green;
             }
 
             alertaVencimientosLabel.Text = $"ATENCION: {resultMessage}";
