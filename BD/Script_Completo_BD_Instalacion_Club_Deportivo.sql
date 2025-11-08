@@ -72,8 +72,7 @@ CREATE TABLE NoSocios (
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     FechaNacimiento DATE NOT NULL,
-    AptoMedico ENUM('S', 'N') NOT NULL,
-    idActividad INT(11) DEFAULT NULL  -- REVISAR QUE NO HACE FALTA
+    AptoMedico ENUM('S', 'N') NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
 -- se crean índices para la NoSocios
