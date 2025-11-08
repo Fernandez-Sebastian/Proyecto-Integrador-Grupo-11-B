@@ -31,6 +31,7 @@
             lblTitulo = new Label();
             header = new Panel();
             groupBox2 = new GroupBox();
+            buttonLimpiarBusqueda = new Button();
             txtHabilitado = new TextBox();
             label5 = new Label();
             textNumeroSocio = new TextBox();
@@ -59,11 +60,8 @@
             checkBoxAbonarTodo = new CheckBox();
             labelTodasCuotasAdeudadas = new Label();
             comboBoxCuotas = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
             labelComboCuotas = new Label();
             BtnPagarCuota = new Button();
-            buttonLimpiarBusqueda = new Button();
             header.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -121,6 +119,22 @@
             groupBox2.TabIndex = 9;
             groupBox2.TabStop = false;
             groupBox2.Text = "Datos Del Socio";
+            // 
+            // buttonLimpiarBusqueda
+            // 
+            buttonLimpiarBusqueda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonLimpiarBusqueda.BackColor = Color.FromArgb(176, 196, 222);
+            buttonLimpiarBusqueda.FlatAppearance.BorderSize = 0;
+            buttonLimpiarBusqueda.FlatStyle = FlatStyle.Flat;
+            buttonLimpiarBusqueda.Font = new Font("Segoe UI", 9F);
+            buttonLimpiarBusqueda.ForeColor = Color.FromArgb(31, 31, 31);
+            buttonLimpiarBusqueda.Location = new Point(83, 250);
+            buttonLimpiarBusqueda.Name = "buttonLimpiarBusqueda";
+            buttonLimpiarBusqueda.Size = new Size(188, 44);
+            buttonLimpiarBusqueda.TabIndex = 15;
+            buttonLimpiarBusqueda.Text = "Limpiar Campos";
+            buttonLimpiarBusqueda.UseVisualStyleBackColor = false;
+            buttonLimpiarBusqueda.Click += buttonLimpiarBusqueda_Click;
             // 
             // txtHabilitado
             // 
@@ -286,8 +300,6 @@
             groupBox1.Controls.Add(checkBoxAbonarTodo);
             groupBox1.Controls.Add(labelTodasCuotasAdeudadas);
             groupBox1.Controls.Add(comboBoxCuotas);
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(button2);
             groupBox1.Controls.Add(labelComboCuotas);
             groupBox1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             groupBox1.ForeColor = Color.FromArgb(31, 31, 31);
@@ -452,36 +464,6 @@
             comboBoxCuotas.Size = new Size(339, 25);
             comboBoxCuotas.TabIndex = 12;
             // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.BackColor = Color.FromArgb(138, 194, 133);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button1.ForeColor = Color.White;
-            button1.Location = new Point(494, 468);
-            button1.Name = "button1";
-            button1.Size = new Size(188, 40);
-            button1.TabIndex = 10;
-            button1.Text = "Buscar Deuda";
-            button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.BackColor = Color.FromArgb(138, 194, 133);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            button2.ForeColor = Color.White;
-            button2.Location = new Point(668, 240);
-            button2.Name = "button2";
-            button2.Size = new Size(188, 40);
-            button2.TabIndex = 9;
-            button2.Text = "Buscar Socio";
-            button2.UseVisualStyleBackColor = false;
-            // 
             // labelComboCuotas
             // 
             labelComboCuotas.AutoSize = true;
@@ -509,22 +491,6 @@
             BtnPagarCuota.UseVisualStyleBackColor = false;
             BtnPagarCuota.Visible = false;
             BtnPagarCuota.Click += PagarCuota_Click;
-            // 
-            // buttonLimpiarBusqueda
-            // 
-            buttonLimpiarBusqueda.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            buttonLimpiarBusqueda.BackColor = Color.FromArgb(176, 196, 222);
-            buttonLimpiarBusqueda.FlatAppearance.BorderSize = 0;
-            buttonLimpiarBusqueda.FlatStyle = FlatStyle.Flat;
-            buttonLimpiarBusqueda.Font = new Font("Segoe UI", 9F);
-            buttonLimpiarBusqueda.ForeColor = Color.FromArgb(31, 31, 31);
-            buttonLimpiarBusqueda.Location = new Point(83, 250);
-            buttonLimpiarBusqueda.Name = "buttonLimpiarBusqueda";
-            buttonLimpiarBusqueda.Size = new Size(188, 44);
-            buttonLimpiarBusqueda.TabIndex = 15;
-            buttonLimpiarBusqueda.Text = "Limpiar Campos";
-            buttonLimpiarBusqueda.UseVisualStyleBackColor = false;
-            buttonLimpiarBusqueda.Click += buttonLimpiarBusqueda_Click;
             // 
             // CobrarCuota
             // 
@@ -570,8 +536,6 @@
         private Button BuscarDeuda;
         private Button VolverMenu;
         private GroupBox groupBox1;
-        private Button button1;
-        private Button button2;
         private Label labelComboCuotas;
         private ComboBox comboBoxCuotas;
         private Button BtnPagarCuota;
