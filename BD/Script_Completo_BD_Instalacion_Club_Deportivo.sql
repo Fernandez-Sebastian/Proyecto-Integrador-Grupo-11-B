@@ -75,10 +75,6 @@ CREATE TABLE NoSocios (
     AptoMedico ENUM('S', 'N') NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
--- se crean índices para la NoSocios
-ALTER TABLE nosocios
-  ADD KEY idActividad (idActividad);
-
 DROP TABLE IF EXISTS CobroActividad;
 CREATE TABLE CobroActividad (
     IdCobro INT AUTO_INCREMENT PRIMARY KEY,
