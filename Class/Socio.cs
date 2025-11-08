@@ -3,9 +3,10 @@ using Proyecto_Integrador_Grupo_11_B.Datos;
 
 namespace Proyecto_Integrador_Grupo_11_B.Class
 {
-    internal class Socio : Persona
+    public class Socio : Persona
     {
         public DateTime FechaNacimiento { get; set; }
+
         public string AptoMedico { get; set; }
 
         public string RegistrarSocio()
@@ -44,10 +45,10 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 return "ERROR: " + ex.Message;
             }
         }
-        
+
         // Función que devuelve true o false si existe en la base de datos el DNI ingresado.
         // Validar si el DNI ya existe
-        public bool ExisteDni(string Dni, out string error )
+        public bool ExisteDni(string Dni, out string error)
         {
             try
             {
@@ -72,13 +73,74 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             }
         }
 
-        // Seteo los campos heredados
-        //public void SetDatosPersona(string dni, string nombre, string apellido)
-        //{
-        //    this.Dni = dni;
-        //    this.Nombre = nombre;
-        //    this.Apellido = apellido;
-        //}
+        /// <summary>
+        /// Método que obtiene el IdSocio a través del dni
+        /// </summary>
+        /// <param name="Dni">Dni del socio a buscar</param>
+        /// <returns></returns>
+        public static int GetIdSocioByDni(string Dni)
+        {
+            try
+            {
+                using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
+                {
+                    conn.Open();
+                    string SQL = "SELECT IdSocio FROM Socios WHERE Dni = @dni";
 
+                    using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@dni", Dni);
+                        return Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al consultar datos del socio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Método que instancia el socio dado un dni si lo encuentra en la 
+        /// tabla socios
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns></returns>
+        public static Socio? GetSocioByDni(string dni)
+        {
+            try
+            {
+                using var conn = Conexion.getInstancia().CrearConexion();
+                conn.Open();
+
+                const string SQL = @"
+                    SELECT DNI, NOMBRE, APELLIDO
+                    FROM SOCIOS
+                    WHERE HABILITADO = 'S' AND DNI = @dni
+                    LIMIT 1;";
+
+                using var cmd = new MySqlCommand(SQL, conn);
+                cmd.Parameters.Add("@dni", MySqlDbType.VarChar, 15).Value = dni;
+
+                using var reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Socio
+                    {
+                        Dni = reader["Dni"].ToString(),
+                        Nombre = reader["Nombre"].ToString(),
+                        Apellido = reader["Apellido"].ToString()
+                    };
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar socio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
     }
 }

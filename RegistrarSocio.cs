@@ -9,6 +9,8 @@ namespace Proyecto_Integrador_Grupo_11_B
             InitializeComponent();
         }
 
+        public Socio socioNuevo { get; set; }
+
         private void VolverMenu_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -119,8 +121,9 @@ namespace Proyecto_Integrador_Grupo_11_B
 
                 if (EstadoAlta == "OK")
                 {
+                    socioNuevo = NuevoSocio;
+                    ImprimirCarnet.Enabled = true;
                     MessageBox.Show($"\"Socio {nombre} {apellido} registrado correctamente. Para realizar una actividad debe tener la cuota al día.\"");
-                    this.Close();
                 }
                 else
                 {
@@ -136,9 +139,21 @@ namespace Proyecto_Integrador_Grupo_11_B
             }
         }
 
+        /// <summary>
+        /// Método que instancia el carnet del socio y levanta el form
+        /// para imprimir el carnet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ImprimirCarnet_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Imprimir Carnet en Desarrollo");
+            ///buscamos el idSocio del socio que acabo de dar de alta para identificar el carnet
+            int idSocio = Socio.GetIdSocioByDni(socioNuevo.Dni);
+            //busccamos o generamos el carnet asociado
+            Carnet carnet = new(socioNuevo, idSocio);
+            //abrimos el form para imprimir
+            ImprimirCarnet carnetForm = new(carnet);
+            carnetForm.ShowDialog();
         }
     }
 }

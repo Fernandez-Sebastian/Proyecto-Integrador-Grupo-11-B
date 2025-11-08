@@ -157,6 +157,7 @@
             ImprimirCarnet.TabIndex = 5;
             ImprimirCarnet.Text = "Imprimir carnet";
             ImprimirCarnet.UseVisualStyleBackColor = false;
+            ImprimirCarnet.Enabled = false;
             ImprimirCarnet.Click += ImprimirCarnet_Click;
             // 
             // txtDni
