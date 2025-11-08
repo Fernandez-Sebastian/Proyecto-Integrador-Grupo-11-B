@@ -9,7 +9,6 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
         public string AptoMedico { get; set; }
         public string Habilitado { get; set; }
-        public string FechaPagoCuota { get; set; }
         public string idSocio { get; set; }
 
         public string RegistrarSocio()
@@ -99,7 +98,6 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                                 this.Apellido = reader["Apellido"].ToString();
                                 this.FechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]);
                                 this.AptoMedico = reader["AptoMedico"].ToString();
-                                this.FechaPagoCuota = reader["FechaPagoCuota"].ToString();
                                 this.Habilitado = reader["Habilitado"].ToString();
                                 this.idSocio = reader["idSocio"].ToString();
                                 return true;
@@ -185,7 +183,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 conn.Open();
 
                 const string SQL = @"
-                    SELECT IdSocio, Dni, Nombre, Apellido, FechaNacimiento, AptoMedico, Habilitado, FechaPagoCuota
+                    SELECT IdSocio, Dni, Nombre, Apellido, FechaNacimiento, AptoMedico, Habilitado
                     FROM Socios
                     WHERE Dni = @dni
                     LIMIT 1;";
@@ -204,8 +202,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         Apellido = reader["Apellido"].ToString(),
                         FechaNacimiento = Convert.ToDateTime(reader["FechaNacimiento"]),
                         AptoMedico = reader["AptoMedico"].ToString(),
-                        Habilitado = reader["Habilitado"].ToString(),
-                        FechaPagoCuota = reader["FechaPagoCuota"].ToString()
+                        Habilitado = reader["Habilitado"].ToString()
                     };
                 }
 
