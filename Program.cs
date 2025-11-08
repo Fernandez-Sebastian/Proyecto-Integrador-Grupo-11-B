@@ -12,7 +12,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new Login());
+            Application.Run(new ConfiguracionBD());
         }
     }
 }

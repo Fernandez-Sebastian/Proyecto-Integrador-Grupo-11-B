@@ -12,13 +12,26 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
         private string usuario;
         private string clave;
         private static Conexion? con = null;
-        private Conexion() // asignamos valores a las variables de la conexion
+        public Conexion(string servidor, string puerto, string usuario, string clave)
         {
             this.baseDatos = "ClubDeportivo";
-            this.servidor = "localhost";
-            this.puerto = "3306";
-            this.usuario = "root";
-            this.clave = "";
+            this.servidor = servidor;
+            this.puerto = puerto;
+            this.usuario = usuario;
+            this.clave = clave;
+        }
+        public static void Inicializar(string servidor, string puerto, string usuario, string clave)
+        {
+            con = new Conexion(servidor, puerto, usuario, clave);
+        }
+        public static Conexion getInstancia()
+        {
+            if (con == null)
+            {
+                MessageBox.Show("No se ha configurado la conexión a la base de datos.");
+                throw new InvalidOperationException("La conexión no ha sido inicializada.");
+            }
+            return con;
         }
         // proceso de interacción
         public MySqlConnection CrearConexion()
@@ -42,14 +55,20 @@ namespace Proyecto_Integrador_Grupo_11_B.Datos
             }
             return cadena;
         }
-        // para evaluar la instancia de la conectividad
-        public static Conexion getInstancia()
+        public bool ProbarConexion()
         {
-            if (con == null) // quiere decir que la conexion esta cerrada
+            try
             {
-                con = new Conexion(); // se crea una nueva
+                using (var conn = CrearConexion())
+                {
+                    conn.Open();
+                    return true;
+                }
             }
-            return con;
+            catch
+            {
+                return false;
+            }
         }
     }
 }
