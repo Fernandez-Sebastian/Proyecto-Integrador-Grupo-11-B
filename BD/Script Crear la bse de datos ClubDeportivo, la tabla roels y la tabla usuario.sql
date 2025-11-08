@@ -1,4 +1,4 @@
-﻿DROP DATABASE IF EXISTS ClubDeportivo;
+DROP DATABASE IF EXISTS ClubDeportivo;
 CREATE DATABASE ClubDeportivo;
 USE ClubDeportivo;
 
@@ -40,6 +40,7 @@ CREATE TABLE Socios (
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     FechaNacimiento DATE NOT NULL,
+    FechaAlta DATE NOT NULL DEFAULT current_timestamp,
     AptoMedico ENUM('S', 'N') NOT NULL DEFAULT 'N',
     Habilitado ENUM('S', 'N') NOT NULL DEFAULT 'N'
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
@@ -72,3 +73,34 @@ CREATE TABLE CobroActividad (
 
 INSERT INTO usuario(CodUsu,NombreUsu,PassUsu,RolUsu) VALUES
 (1,'emma','123456',120);
+
+-- Crear la tabla Cuota 
+CREATE TABLE Cuota (
+    IdCuota INT AUTO_INCREMENT PRIMARY KEY,
+    NumeroCuota INT NOT NULL,
+    FechaPago DATE NULL, 
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NOT NULL,
+    Monto DOUBLE NOT NULL,
+    MetodoPago VARCHAR(30),
+    Vigente ENUM ('S', 'N') NOT NULL DEFAULT 'N',
+    CantidadCuotaFinanciada ENUM('1','3','6') NOT NULL DEFAULT '1',
+    Estado ENUM('Paga', 'Impaga') NOT NULL DEFAULT 'Impaga',
+    IdSocio INT NULL,
+	FOREIGN KEY (idSocio) REFERENCES Socios(idSocio)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL    
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
+-- Crear la tabla Carnet
+CREATE TABLE Carnet (
+    IdCarnet INT AUTO_INCREMENT PRIMARY KEY,
+    FechaEmision DATE NOT NULL,
+    FechaVencimiento DATE NOT NULL,
+    Numero INT NOT NULL,
+    IdSocio INT NULL,
+	FOREIGN KEY (idSocio) REFERENCES Socios(idSocio)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL 
+) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
