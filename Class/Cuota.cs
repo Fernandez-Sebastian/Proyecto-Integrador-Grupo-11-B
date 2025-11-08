@@ -287,9 +287,9 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
                     string insertUltima = @"
                         INSERT INTO cuota
-                            (idSocio, NumeroCuota, FechaInicio, FechaFin, Estado, Vigente)
+                            (idSocio, NumeroCuota, FechaInicio, FechaFin, FechaPago, MetodoPago, Estado, Vigente)
                         VALUES
-                            (@idSocio, @NumeroCuota, @FechaInicio, @FechaFin, @Estado, @Vigente)";
+                            (@idSocio, @NumeroCuota, @FechaInicio, @FechaFin, @FechaPago, @MetodoPago, @Estado, @Vigente)";
 
                     using (MySqlCommand cmdUltima = new MySqlCommand(insertUltima, conn))
                     {
@@ -297,10 +297,13 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                         cmdUltima.Parameters.AddWithValue("@NumeroCuota", numeroCuota);
                         cmdUltima.Parameters.AddWithValue("@FechaInicio", fechaInicioNueva);
                         cmdUltima.Parameters.AddWithValue("@FechaFin", fechaFinFinal);
+                        cmdUltima.Parameters.AddWithValue("@FechaPago", DateTime.Now.Date);
+                        cmdUltima.Parameters.AddWithValue("@MetodoPago", metodoPago);
                         cmdUltima.Parameters.AddWithValue("@Estado", "Paga");
                         cmdUltima.Parameters.AddWithValue("@Vigente", "S");
                         cmdUltima.ExecuteNonQuery();
                     }
+                    TotalCuotasAbonadas += Monto;
                 }
                 // Actualizo al Socio al Estado Habilitado = S, ya que pago un año adelantado.
                 // Creo la instancia del Socio y uso sus métodos.
