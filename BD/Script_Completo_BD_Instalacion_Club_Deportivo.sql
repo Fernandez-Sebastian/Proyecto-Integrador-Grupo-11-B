@@ -6,16 +6,21 @@ DROP DATABASE IF EXISTS ClubDeportivo;
 CREATE DATABASE ClubDeportivo;
 USE ClubDeportivo;
 
+-- Crear tabla de roles
+DROP TABLE IF EXISTS roles;
 CREATE TABLE roles(
 RolUsu INT,
 NomRol VARCHAR(30),
 CONSTRAINT PRIMARY KEY(RolUsu)
 );
 
+-- insert de datos de roles
 INSERT INTO roles VALUES
 (120,'Administrador'),
 (121,'Empleado');
 
+-- Crear tabla de usuarios
+DROP TABLE IF EXISTS usuario;
 CREATE TABLE usuario(
 CodUsu INT AUTO_INCREMENT,
 NombreUsu VARCHAR (20),
@@ -26,10 +31,12 @@ CONSTRAINT pk_usuario PRIMARY KEY (CodUsu),
 CONSTRAINT fk_usuario FOREIGN KEY(RolUsu) REFERENCES roles(RolUsu)
 );
 
+-- insert de usuario
 INSERT INTO usuario(CodUsu,NombreUsu,PassUsu,RolUsu) VALUES
 (1,'emma','123456',120);
 
 -- Crear la tabla Actividad
+DROP TABLE IF EXISTS Actividad;
 CREATE TABLE Actividad (
     idActividad INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(50) NOT NULL,
@@ -40,9 +47,14 @@ CREATE TABLE Actividad (
     PrecioActividad DOUBLE NOT NULL
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
+-- insert de Actividades
+INSERT INTO Actividad (idActividad, Nombre, Dia, Horario, Cupo, ProfesorAsignado, PrecioActividad) VALUES
+(1, 'Gym', '2025-11-02', '2025-11-15 23:26:01', 10, 'Juan', 120000);
+
 -- Crear la tabla Socios
+DROP TABLE IF EXISTS Socios;
 CREATE TABLE Socios (
-    idSocio INT AUTO_INCREMENT PRIMARY KEY,
+    idSocio INT(11) AUTO_INCREMENT PRIMARY KEY,
     Dni VARCHAR(15) NOT NULL UNIQUE,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
@@ -53,19 +65,22 @@ CREATE TABLE Socios (
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
 -- Crear la tabla NoSocios
+DROP TABLE IF EXISTS NoSocios;
 CREATE TABLE NoSocios (
-    idNoSocio INT AUTO_INCREMENT PRIMARY KEY,
+    idNoSocio INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Dni VARCHAR(15) NOT NULL UNIQUE,
     Nombre VARCHAR(50) NOT NULL,
     Apellido VARCHAR(50) NOT NULL,
     FechaNacimiento DATE NOT NULL,
     AptoMedico ENUM('S', 'N') NOT NULL,
-    idActividad INT,  -- 🔗 Clave foránea
-    FOREIGN KEY (idActividad) REFERENCES Actividad(idActividad)
-        ON UPDATE CASCADE
-        ON DELETE SET NULL
+    idActividad INT(11) DEFAULT NULL  -- REVISAR QUE NO HACE FALTA
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
+-- se crean índices para la NoSocios
+ALTER TABLE nosocios
+  ADD KEY idActividad (idActividad);
+
+DROP TABLE IF EXISTS CobroActividad;
 CREATE TABLE CobroActividad (
     IdCobro INT AUTO_INCREMENT PRIMARY KEY,
     IdNoSocio INT NOT NULL,
@@ -78,15 +93,21 @@ CREATE TABLE CobroActividad (
     FOREIGN KEY (IdActividad) REFERENCES Actividad(IdActividad)
 ) ENGINE=InnoDB;
 
+-- se crean índices para cobroactividad
+ALTER TABLE cobroactividad
+  ADD KEY IdNoSocio (IdNoSocio),
+  ADD KEY IdActividad (IdActividad);
+
 -- Crear la tabla Cuota 
+DROP TABLE IF EXISTS Cuota;
 CREATE TABLE Cuota (
-    IdCuota INT AUTO_INCREMENT PRIMARY KEY,
-    NumeroCuota INT NOT NULL,
+    IdCuota INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NumeroCuota INT(11) NOT NULL,
     FechaPago DATE NULL, 
     FechaInicio DATE NOT NULL,
     FechaFin DATE NOT NULL,
-    Monto DOUBLE NOT NULL,
-    MetodoPago VARCHAR(30),
+    Monto DOUBLE NOT NULL DEFAULT '45000',
+    MetodoPago VARCHAR(30) DEFAULT NULL,
     Vigente ENUM ('S', 'N') NOT NULL DEFAULT 'N',
     CantidadCuotaFinanciada ENUM('1','3','6') NOT NULL DEFAULT '1',
     Estado ENUM('Paga', 'Impaga') NOT NULL DEFAULT 'Impaga',
@@ -96,7 +117,12 @@ CREATE TABLE Cuota (
         ON DELETE SET NULL    
 ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
+-- se crean índices para la tabla cuota
+ALTER TABLE cuota
+  ADD KEY idSocio (idSocio);
+
 -- Crear la tabla Carnet
+DROP TABLE IF EXISTS Carnet;
 CREATE TABLE Carnet (
     IdCarnet INT AUTO_INCREMENT PRIMARY KEY,
     FechaEmision DATE NOT NULL,
