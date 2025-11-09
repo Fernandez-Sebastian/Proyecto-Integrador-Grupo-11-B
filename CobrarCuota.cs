@@ -7,6 +7,8 @@ namespace Proyecto_Integrador_Grupo_11_B
         public CobrarCuota()
         {
             InitializeComponent();
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 850);
         }
 
         // Método para buscar un Socio por su DNI.
