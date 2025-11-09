@@ -28,10 +28,8 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
            string query = $@"
                 SELECT cuota.idCuota, cuota.NumeroCuota, socios.idSocio, socios.Nombre, socios.Apellido, socios.Dni, 
-	                IF(cuota.FechaInicio='0000-00-00', NULL, cuota.FechaInicio) AS FechaInicio,
-                    IF(cuota.FechaFin='0000-00-00', NULL, cuota.FechaFin) AS FechaFin,
-                    IF(cuota.FechaPago='0000-00-00', NULL, cuota.FechaPago) AS FechaPago, 
-                    cuota.Monto, cuota.Vigente, cuota.MetodoPago, cuota.Estado, socios.Habilitado
+	               cuota.FechaInicio, cuota.FechaFin, cuota.FechaPago, 
+                   cuota.Monto, cuota.Vigente, cuota.MetodoPago, cuota.Estado, socios.Habilitado
                 FROM cuota 
                 INNER JOIN socios ON (socios.idSocio = cuota.idSocio)
                 WHERE cuota.idSocio = @idSocio AND cuota.Estado = 'Impaga'
@@ -176,9 +174,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             List<Cuota> listaCuotasFuturas = new List<Cuota>();
             string query = @"
                 SELECT cuota.idCuota, cuota.NumeroCuota, socios.idSocio, 
-                    IF(cuota.FechaInicio='0000-00-00', NULL, cuota.FechaInicio) AS FechaInicio,
-                    IF(cuota.FechaFin='0000-00-00', NULL, cuota.FechaFin) AS FechaFin,
-                    IF(cuota.FechaPago='0000-00-00', NULL, cuota.FechaPago) AS FechaPago, 
+                    cuota.FechaInicio, cuota.FechaFin, cuota.FechaPago, 
                     cuota.Monto, cuota.Vigente, cuota.MetodoPago, cuota.Estado
                 FROM cuota
                 INNER JOIN socios ON socios.idSocio = cuota.idSocio
