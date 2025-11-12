@@ -94,7 +94,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             // Limpiar ComboBox antes de llenar con las cuotas a pagar.
             comboBoxCuotas.Items.Clear();
-            
+
             // Obtenemos la deuda de cuotas del Socio.
             List<Cuota> cuotasAdeudadas = Cuota.BuscarCuotasAdeudadas(idSocio);
 
@@ -329,7 +329,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             txtApellido.Text = "";
             txtHabilitado.Text = "";
             txtDni.Text = "";
-            
+
             // Blanqueo los campos de opciones de pago.
             checkBoxAbonarAnio.Checked = false;
             checkBoxAbonarTodo.Checked = false;
@@ -341,10 +341,40 @@ namespace Proyecto_Integrador_Grupo_11_B
             radioEfectivo.Checked = false;
             radio6Cuotas.Checked = false;
             radio3Cuotas.Checked = false;
-            
+
             // Oculto el botón de pagar cuota y habilito el campo DNI para buscar otro DNI.
             txtDni.Enabled = true;
             BtnPagarCuota.Visible = false;
+        }
+
+        private void CobrarCuota_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

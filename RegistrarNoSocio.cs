@@ -1,4 +1,6 @@
 ﻿using Proyecto_Integrador_Grupo_11_B.Class;
+using System;
+using System.Windows.Forms;
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
@@ -7,6 +9,7 @@ namespace Proyecto_Integrador_Grupo_11_B
         public RegistrarNoSocio()
         {
             InitializeComponent();
+            Tema.Aplicar(this);   // aplica el estilo
         }
 
         private void VolverMenu_Click(object sender, EventArgs e)
@@ -28,13 +31,9 @@ namespace Proyecto_Integrador_Grupo_11_B
         {
             try
             {
-                // Se crea una instancia la clase No Socio.
                 NoSocio NuevoNoSocio = new();
-
-                // Declaramso la variable para capturar y mostrar el error.
                 string error = "";
 
-                // Tomamos los valores del formulario y lo asignamos a variables para hacer las validaciones correspondientes.
                 string dni = txtDni.Text.Trim();
                 string nombre = txtNombre.Text.Trim();
                 string apellido = txtApellido.Text.Trim();
@@ -64,11 +63,8 @@ namespace Proyecto_Integrador_Grupo_11_B
                 }
 
                 int edad = DateTime.Today.Year - fechaNacimiento.Year;
-                // calcula el mes de nacimiento para determinar si ya cumplió o no los años.
                 if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--;
 
-                // La fecha del No socio debe ser mayor que 5 años y menor que 100 años
-                // Además no se puede ingresar una edad mayor al día de hoy
                 if (fechaNacimiento > DateTime.Today)
                 {
                     MessageBox.Show("La fecha de nacimiento no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -85,17 +81,12 @@ namespace Proyecto_Integrador_Grupo_11_B
                     return;
                 }
 
-                // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del No Socio.
-                // Valido que el DNI no este registardo.
-
                 if (NuevoNoSocio.ExisteDni(dni, out error))
                 {
                     MessageBox.Show($"Ya existe un No Socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Si llegamos aca, el DNI ingresado no esta duplicado y los datos estan validados.
-                // Agregamos alerta para confirmar el Nuevo alta del No Socio.
                 DialogResult result = MessageBox.Show(
                     $"¿Seguro que deseas dar de alta a {nombre} {apellido} DNI: {dni}? ",
                     "Confirmar salida",
@@ -104,17 +95,14 @@ namespace Proyecto_Integrador_Grupo_11_B
                 );
 
                 if (result == DialogResult.No)
-                {
                     return;
-                }
-
-                // Carga de datos y registro del No Socio en la base de datos.
 
                 NuevoNoSocio.Dni = dni;
                 NuevoNoSocio.Nombre = nombre;
                 NuevoNoSocio.Apellido = apellido;
                 NuevoNoSocio.FechaNacimiento = fechaNacimiento;
                 NuevoNoSocio.AptoMedico = aptoMedico;
+
                 string EstadoAlta = NuevoNoSocio.RegistrarNoSocio();
 
                 if (EstadoAlta == "OK")
@@ -138,7 +126,7 @@ namespace Proyecto_Integrador_Grupo_11_B
 
         private void lblTitulo_Click(object sender, EventArgs e)
         {
-
+            // opcional
         }
     }
 }
