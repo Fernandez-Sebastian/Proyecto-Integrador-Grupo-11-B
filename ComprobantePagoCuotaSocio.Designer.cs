@@ -68,13 +68,11 @@
             // panelComprobanteCompleto
             // 
             panelComprobanteCompleto.Controls.Add(header);
-            panelComprobanteCompleto.Controls.Add(VolverMenu);
-            panelComprobanteCompleto.Controls.Add(Imprimir);
             panelComprobanteCompleto.Controls.Add(groupBox2);
             panelComprobanteCompleto.Controls.Add(groupBox1);
             panelComprobanteCompleto.Location = new Point(0, -4);
             panelComprobanteCompleto.Name = "panelComprobanteCompleto";
-            panelComprobanteCompleto.Size = new Size(838, 638);
+            panelComprobanteCompleto.Size = new Size(839, 558);
             panelComprobanteCompleto.TabIndex = 12;
             // 
             // header
@@ -84,7 +82,7 @@
             header.Dock = DockStyle.Top;
             header.Location = new Point(0, 0);
             header.Name = "header";
-            header.Size = new Size(838, 48);
+            header.Size = new Size(839, 48);
             header.TabIndex = 18;
             // 
             // lblTitulo
@@ -94,7 +92,7 @@
             lblTitulo.ForeColor = Color.White;
             lblTitulo.Location = new Point(0, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(838, 48);
+            lblTitulo.Size = new Size(839, 48);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Comprobante De Pago";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -107,7 +105,7 @@
             VolverMenu.FlatStyle = FlatStyle.Flat;
             VolverMenu.Font = new Font("Segoe UI", 9F);
             VolverMenu.ForeColor = Color.FromArgb(31, 31, 31);
-            VolverMenu.Location = new Point(92, 566);
+            VolverMenu.Location = new Point(82, 576);
             VolverMenu.Name = "VolverMenu";
             VolverMenu.Size = new Size(188, 44);
             VolverMenu.TabIndex = 16;
@@ -123,7 +121,7 @@
             Imprimir.FlatStyle = FlatStyle.Flat;
             Imprimir.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             Imprimir.ForeColor = Color.White;
-            Imprimir.Location = new Point(545, 566);
+            Imprimir.Location = new Point(563, 576);
             Imprimir.Name = "Imprimir";
             Imprimir.Size = new Size(188, 44);
             Imprimir.TabIndex = 17;
@@ -153,7 +151,7 @@
             groupBox2.Location = new Point(3, 248);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(16, 12, 16, 16);
-            groupBox2.Size = new Size(830, 312);
+            groupBox2.Size = new Size(831, 312);
             groupBox2.TabIndex = 15;
             groupBox2.TabStop = false;
             // 
@@ -423,6 +421,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(839, 632);
             Controls.Add(panelComprobanteCompleto);
+            Controls.Add(VolverMenu);
+            Controls.Add(Imprimir);
             Name = "ComprobantePagoCuotaSocio";
             Text = "ComprobantePagoCuotaSocio";
             panelComprobanteCompleto.ResumeLayout(false);
