@@ -94,7 +94,7 @@
             // imgSocio
             // 
             imgSocio.BorderStyle = BorderStyle.FixedSingle;
-            imgSocio.Image = Properties.Resources.AltaSocio; // ajusta al recurso que tengas
+            imgSocio.Image = Properties.Resources.Goku;
             imgSocio.Location = new Point(32, 32);
             imgSocio.Name = "imgSocio";
             imgSocio.Size = new Size(176, 230);

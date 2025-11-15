@@ -97,6 +97,8 @@ namespace Proyecto_Integrador_Grupo_11_B
         /// </summary>
         private void SetAlertaVencimientoLabelText()
         {
+            //se toma la fecha actual para consultar si existen socios
+            //cuya cuota vence en el día usando sp_listar_deudores_por_fecha
             string fechaConsultar = DateTime.Now.ToString("yyyy-MM-dd");
             MySqlConnection sqlCon;
             sqlCon = Conexion.getInstancia().CrearConexion();
@@ -108,10 +110,11 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             string resultMessage;
 
+            //según el resultado de la consulta se modifica el texto de la advertencia y color del texto del label
             if (reader.HasRows)
             {
                 resultMessage = "Existen socios cuya cuota vence el día de hoy, consultar el listado de vencimientos.";
-                alertaVencimientosLabel.ForeColor = Color.Red;
+                alertaVencimientosLabel.ForeColor = Color.Orange;
             }
             else
             {

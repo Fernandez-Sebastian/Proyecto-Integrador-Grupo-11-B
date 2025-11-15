@@ -42,11 +42,12 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 {
                     conn.Open();
 
+                    //se genera registro para carnet con datos del socio
                     string SQL = "INSERT INTO CARNET (FechaEmision, FechaVencimiento, Numero, IdSocio) " +
                                  "VALUES (@FechaEmision, @FechaVencimiento, @Numero, @IdSocio)";
 
-                    FechaEmision = DateTime.Now;
-                    FechaVencimiento = DateTime.Now.AddYears(1);
+                    FechaEmision = DateTime.Now; //fecha actual
+                    FechaVencimiento = DateTime.Now.AddYears(1); //fecha actual + 1 año
 
                     using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
                     {
@@ -59,14 +60,18 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
                         if (filas > 0)
                         {
+                            //si se genera sin problemas retorna OK
                             return "OK";
                         }
+
+                        //si no se logra insertar se retorna mensaje para el usuario
                         return "No se pudo generar el carnet del socio.";
                     }
                 }
             }
             catch (Exception ex)
             {
+                //se capturan errores de ejecución
                 MessageBox.Show($"Error al generar el carnet del socio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "ERROR: " + ex.Message;
             }
@@ -85,6 +90,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 using var conn = Conexion.getInstancia().CrearConexion();
                 conn.Open();
 
+                //sonsulta de carnet por dni del socio
                 const string SQL = @"
                     SELECT c.IdCarnet, c.FechaEmision, c.FechaVencimiento, c.Numero, c.IdSocio
                     FROM CARNET c
@@ -96,6 +102,9 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 cmd.Parameters.Add("@dni", MySqlDbType.VarChar, 15).Value = dni;
 
                 using var reader = cmd.ExecuteReader();
+
+                //si encuentra registro para el carnet seteamos las propiedades de la clase
+                //y se retorna true
                 if (reader.Read())
                 {
                     FechaEmision = Convert.ToDateTime(reader["FechaEmision"]);
@@ -105,10 +114,12 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                     return true;
                 }
 
+                //si no lo encuentra se retorna false
                 return false;
             }
             catch (Exception ex)
             {
+                //capturamos errores de ejecución
                 MessageBox.Show($"Error al buscar socio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -126,14 +137,15 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 using var conn = Conexion.getInstancia().CrearConexion();
                 conn.Open();
 
+                //se actualiza para el carnet del socio las fechas de emisión y vencimiento
                 const string SQL = @"
                     UPDATE Carnet
                         SET FechaEmision = @FechaEmision,
                             FechaVencimiento = @FechaVencimiento
                     WHERE NUMERO = @dni";
 
-                FechaEmision = DateTime.Now;
-                FechaVencimiento = DateTime.Now.AddYears(1);
+                FechaEmision = DateTime.Now; //fecha actual
+                FechaVencimiento = DateTime.Now.AddYears(1); //fecha actual + 1 año
 
                 using var cmd = new MySqlCommand(SQL, conn);
                 cmd.Parameters.AddWithValue("@dni", dni);
@@ -144,13 +156,16 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
                 if (filas > 0)
                 {
+                    //si se actualiza sin problemas retorna OK
                     return "OK";
                 }
 
-                return "No se pudo generar el carnet del socio.";
+                //si no se logra actualizar se retorna mensaje para el usuario
+                return "No se pudo actualizar el carnet del socio.";
             }
             catch (Exception ex)
             {
+                //se capturan errores de ejecución
                 MessageBox.Show($"Error al generar el carnet del socio: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "ERROR: " + ex.Message;
             }
@@ -164,10 +179,13 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
         {
             string resultMessage;
 
+            //consultamos si existe carnet para el socio por dni
             if (GetCarnetSocioByDni(Socio.Dni))
             {
+                //verificamos si el carnet encontrado se encuentra vencido
                 if (FechaVencimiento <= DateTime.Now)
                 {
+                    //se confirma con el usuario la actualización del carnet
                     DialogResult result = MessageBox.Show(
                         "El carnet del socio se encuentra vencido ¿Desea actualizar el carnet?",
                         "Confirmar actualización de carnet",
@@ -176,10 +194,12 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
                     if (result == DialogResult.Yes)
                     {
+                        //si se confirma se actualiza el carnet
                         resultMessage = ActualizarCarnet(Socio.Dni);
 
                         if (resultMessage != ResulOk)
                         {
+                            //si ocurre algún error se muestra al usuario
                             MessageBox.Show(resultMessage);
                         }
                     }
@@ -187,10 +207,12 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
             }
             else
             {
+                //si no existe carnet para el socio, se genera el carnet
                 resultMessage = GenerarCarnet(Socio.Dni, idSocio);
 
                 if (resultMessage != ResulOk)
                 {
+                    //si ocurre algún error se muestra al usuario
                     MessageBox.Show(resultMessage);
                 }
             }

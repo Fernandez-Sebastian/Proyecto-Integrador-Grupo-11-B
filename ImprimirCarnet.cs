@@ -1,4 +1,5 @@
 ﻿using Proyecto_Integrador_Grupo_11_B.Class;
+using System.Diagnostics;
 using System.Drawing.Drawing2D;
 using System.Drawing.Printing;
 
@@ -70,34 +71,26 @@ namespace Proyecto_Integrador_Grupo_11_B
 
             // Márgenes y orientación para impresión
             //definimos que sea vertical la impresión
-            printDoc.DefaultPageSettings.Margins = new Margins(40, 40, 40, 40);
+            printDoc.DefaultPageSettings.Margins = new Margins(40, 40, 10, 40);
             printDoc.DefaultPageSettings.Landscape = false;
 
-            // Verificamos si existe la impresora Microsoft Print to PDF
-            string? pdfPrinter = PrinterSettings.InstalledPrinters
-                .Cast<string>()
-                .FirstOrDefault(p => p.IndexOf("Microsoft Print to PDF", StringComparison.OrdinalIgnoreCase) >= 0);
+            //ruta donde se va a guardar el PDF
+            string rutaPdf = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
+                $"Carnet_Socio_Nro_{carnetSocio.Numero}_{DateTime.Now:yyyyMMdd_HHmm}.pdf");
 
-            // Si se encuentra Microsoft Print to PDF, se la selecciona para la impresión.
-            if (pdfPrinter != null)
-            {
-                printDoc.PrinterSettings.PrinterName = pdfPrinter;
-            }
+            // Indicamos el nombre del archivo que generará el PDF
+            printDoc.PrinterSettings.PrintToFile = true;
+            printDoc.PrinterSettings.PrintFileName = rutaPdf;
 
-            //Mostramos cuadro de diálogo de impresión al usuario.
-            // Permite seleccionar la impresora, definir copias, etc.
-            // Se asocia el 'printDoc' configurado al diálogo.
-            PrintDialog print = new PrintDialog()
-            {
-                UseEXDialog = true,
-                Document = printDoc
-            };
+            //imprimir
+            printDoc.Print();
 
-            //Si el usuario confirma, ejecutamos la impresión
-            if (print.ShowDialog(this) == DialogResult.OK)
+            // Abrimos automáticamente el PDF
+            Process.Start(new ProcessStartInfo()
             {
-                printDoc.Print();
-            }
+                FileName = rutaPdf,
+                UseShellExecute = true
+            });
         }
 
         /// <summary>
@@ -127,9 +120,9 @@ namespace Proyecto_Integrador_Grupo_11_B
             int alto = (int)(imagen.Height * escala);
             //calculamos posición en la hoja
             int x = margen.Left + (margen.Width - ancho) / 2;
-            int y = margen.Top + (margen.Height - alto) / 2;
+            int y = margen.Top;
 
-            //se mejora calidad de impresión            
+            //se mejora calidad de impresión
             e.Graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
