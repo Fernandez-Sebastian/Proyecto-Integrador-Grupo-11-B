@@ -8,7 +8,6 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
         public DateTime FechaNacimiento { get; set; }
         public string AptoMedico { get; set; }
         public int IdNoSocio { get; set; }
-        public int? IdActividad { get; set; }
         public string RegistrarNoSocio()
         {
             try

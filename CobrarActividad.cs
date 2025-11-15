@@ -130,10 +130,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                                     Nombre = reader.GetString("Nombre"),
                                     Apellido = reader.GetString("Apellido"),
                                     FechaNacimiento = reader.GetDateTime("FechaNacimiento"),
-                                    AptoMedico = reader.GetString("AptoMedico"),
-                                    IdActividad = reader.IsDBNull(reader.GetOrdinal("idActividad"))
-                                                  ? (int?)null
-                                                  : reader.GetInt32("idActividad")
+                                    AptoMedico = reader.GetString("AptoMedico")
                                 };
                             }
                         }
