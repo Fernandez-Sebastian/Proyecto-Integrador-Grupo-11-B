@@ -98,7 +98,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 // Agregamos alerta para confirmar el Nuevo alta del No Socio.
                 DialogResult result = MessageBox.Show(
                     $"¿Seguro que deseas dar de alta a {nombre} {apellido} DNI: {dni}? ",
-                    "Confirmar salida",
+                    "Confirmar Alta",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
