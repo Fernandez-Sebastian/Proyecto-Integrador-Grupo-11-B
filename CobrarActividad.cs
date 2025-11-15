@@ -34,7 +34,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             txtApellido.TextChanged += (s, e) => VerificarCamposCompletos();
             txtAptoMedico.TextChanged += (s, e) => VerificarCamposCompletos();
 
-            // 🔒 Hacer campos de solo lectura
+            // Hacer campos de solo lectura
             txtIdNoSocio.ReadOnly = true;
             txtNombre.ReadOnly = true;
             txtApellido.ReadOnly = true;

@@ -19,7 +19,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 {
                     conn.Open();
 
-                    string SQL = "INSERT INTO NoSocios (Dni, Nombre, Apellido, FechaNacimiento, AptoMedico) " +
+                    string SQL = "INSERT INTO nosocios (Dni, Nombre, Apellido, FechaNacimiento, AptoMedico) " +
                                  "VALUES (@dni, @nombre, @apellido, @fechaNacimiento, @aptoMedico)";
 
                     using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
@@ -55,7 +55,7 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
                 using (MySqlConnection conn = Conexion.getInstancia().CrearConexion())
                 {
                     conn.Open();
-                    string SQL = "SELECT COUNT(*) FROM NoSocios WHERE Dni = @dni";
+                    string SQL = "SELECT COUNT(*) FROM nosocios WHERE Dni = @dni";
 
                     using (MySqlCommand cmd = new MySqlCommand(SQL, conn))
                     {

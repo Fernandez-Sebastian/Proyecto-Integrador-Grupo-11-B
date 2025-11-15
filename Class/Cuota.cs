@@ -159,7 +159,8 @@ namespace Proyecto_Integrador_Grupo_11_B.Class
 
 
 
-        // Método para mostrar una descripción de la cuota en el ComboBox.
+        // Re escribimos el método para mostrar una descripción personalizada
+        // de la cuota en el ComboBox.
        public override string ToString()
        {
             string fechaInicioStr = FechaInicio.HasValue ? FechaInicio.Value.ToShortDateString() : "Sin fecha";

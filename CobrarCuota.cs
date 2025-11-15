@@ -24,6 +24,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 string error = "";
                 if (BuscarSocio.ExisteDni(dni, out error))
                 {
+                    // Si existe el socio, creo una instancia del mismo y muestro sus datos en el formulario.
                     BuscarSocio.GetSocio(txtDni.Text);
                     textNumeroSocio.Text = BuscarSocio.idSocio;
                     txtNombre.Text = BuscarSocio.Nombre;
@@ -334,6 +335,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             checkBoxAbonarAnio.Checked = false;
             checkBoxAbonarTodo.Checked = false;
             comboBoxCuotas.Items.Clear();
+            comboBoxCuotas.Text = "";
 
             // Blanqueo las opciones de los métodos de pago
             radioTransferencia.Checked = false;
