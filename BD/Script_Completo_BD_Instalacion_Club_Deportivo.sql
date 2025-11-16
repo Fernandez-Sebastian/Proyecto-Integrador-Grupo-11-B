@@ -40,8 +40,8 @@ DROP TABLE IF EXISTS Actividad;
 CREATE TABLE Actividad (
     idActividad INT AUTO_INCREMENT PRIMARY KEY,
     Nombre VARCHAR(50) NOT NULL,
-    Dia DATE NOT NULL,
-    Horario DATETIME NOT NULL,
+    Dia VARCHAR(50) NOT NULL,
+    Horario VARCHAR(50) NOT NULL,
     Cupo INT NOT NULL,
     ProfesorAsignado VARCHAR(50) NOT NULL,
     PrecioActividad DOUBLE NOT NULL
@@ -49,7 +49,8 @@ CREATE TABLE Actividad (
 
 -- insert de Actividades
 INSERT INTO Actividad (idActividad, Nombre, Dia, Horario, Cupo, ProfesorAsignado, PrecioActividad) VALUES
-(1, 'Gym', '2025-11-02', '2025-11-15 23:26:01', 10, 'Juan', 120000);
+(1, 'Gym', 'Lunes a Sábados', 'De 6:00 a 20:00', 50, 'Armando E. Quito ', 120000),
+(2, 'Boxeo', 'Martes y Jueves', 'De 20:00 a 22:00', 20, 'José María Gatica', 100000);
 
 -- Crear la tabla Socios
 DROP TABLE IF EXISTS Socios;
