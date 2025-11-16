@@ -1,6 +1,4 @@
-﻿using Proyecto_Integrador_Grupo_11_B.Themes;
-
-namespace Proyecto_Integrador_Grupo_11_B
+﻿namespace Proyecto_Integrador_Grupo_11_B
 {
     partial class RegistrarNoSocio
     {
@@ -74,7 +72,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Registrar No Socio";
             lblTitulo.TextAlign = ContentAlignment.MiddleCenter;
-            lblTitulo.Click += lblTitulo_Click;
+
             // 
             // groupBox1
             // 
@@ -89,7 +87,7 @@ namespace Proyecto_Integrador_Grupo_11_B
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             // 
-            // imgAltaNoSocio
+            // imgAltaSocio
             // 
             imgAltaSocio.BorderStyle = BorderStyle.FixedSingle;
             imgAltaSocio.Image = Properties.Resources.AltaSocio;
@@ -281,8 +279,6 @@ namespace Proyecto_Integrador_Grupo_11_B
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
-
-            Tema.Aplicar(this);
         }
 
         #endregion
