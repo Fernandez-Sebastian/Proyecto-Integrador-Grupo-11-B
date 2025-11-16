@@ -1,4 +1,5 @@
 ﻿using Proyecto_Integrador_Grupo_11_B.Class;
+using System.ComponentModel.DataAnnotations;
 
 namespace Proyecto_Integrador_Grupo_11_B
 {
@@ -31,7 +32,7 @@ namespace Proyecto_Integrador_Grupo_11_B
                 // Se crea una instancia la clase No Socio.
                 NoSocio NuevoNoSocio = new();
 
-                // Declaramso la variable para capturar y mostrar el error.
+                // Declaramos la variable para capturar y mostrar el error.
                 string error = "";
 
                 // Tomamos los valores del formulario y lo asignamos a variables para hacer las validaciones correspondientes.
@@ -41,61 +42,91 @@ namespace Proyecto_Integrador_Grupo_11_B
                 DateTime fechaNacimiento = dtpFechaNacimiento.Value;
                 string aptoMedico = chkAptoMedico.Checked ? "S" : "N";
 
+
+                //Validamos que el dni NO este vacío y que SOLO tenga números
                 if (string.IsNullOrEmpty(dni))
                 {
-                    MessageBox.Show("El campo DNI no puede estar vacío.");
+                    MessageBox.Show("El campo DNI no puede estar vacío.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (!dni.All(char.IsDigit))
+                {
+                    MessageBox.Show("El DNI solo puede contener números.",
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //Validamos que el apellido NO este vacío y que NO tenga números
+
                 if (string.IsNullOrEmpty(nombre))
                 {
-                    MessageBox.Show("El campo Nombre no puede estar vacío.");
+                    MessageBox.Show("El campo Nombre no puede estar vacío.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (nombre.Any(char.IsDigit))
+                {
+                    MessageBox.Show("El Nombre no puede contener números.",
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validamos que el apellido NO este vacío y que NO tenga números
                 if (string.IsNullOrEmpty(apellido))
                 {
-                    MessageBox.Show("El campo Apellido no puede estar vacío.");
+                    MessageBox.Show("El campo Apellido no puede estar vacío.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
+                if (apellido.Any(char.IsDigit))
+                {
+                    MessageBox.Show("El Apellido no puede contener números.",
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                //Validamos que el NoSocio tenga el apto médico para realizar actividades
                 if (aptoMedico == "N")
                 {
-                    MessageBox.Show("Para continuar el alta, debe presentar el Apto Médico.");
+                    MessageBox.Show("Para continuar el alta, debe presentar el Apto Médico.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                int edad = DateTime.Today.Year - fechaNacimiento.Year;
-                // calcula el mes de nacimiento para determinar si ya cumplió o no los años.
-                if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--;
-
+                //Validamos la edad
                 // La fecha del No socio debe ser mayor que 5 años y menor que 100 años
-                // Además no se puede ingresar una edad mayor al día de hoy
-                if (fechaNacimiento > DateTime.Today)
+                int edad = DateTime.Today.Year - fechaNacimiento.Year; //calcula la edad
+
+                if (fechaNacimiento.Date > DateTime.Today.AddYears(-edad)) edad--; // calcula el mes de nacimiento para determinar si ya cumplió o no los años.
+
+               
+                if (fechaNacimiento > DateTime.Today)  // Además no se puede ingresar una edad mayor al día de hoy
                 {
                     MessageBox.Show("La fecha de nacimiento no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (edad < 5)
                 {
-                    MessageBox.Show("El No Socio debe tener al menos 5 años.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("El No Socio debe tener al menos 5 años.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
                 else if (edad > 100)
                 {
-                    MessageBox.Show("La edad ingresada no es válida.", "Edad no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La edad ingresada no es válida.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Si llegue acá todos los datos ingresados ya estan correctos para realizar el alta del No Socio.
-                // Valido que el DNI no este registardo.
+                // Si llegamos acá todos los datos ingresados ya estan correctos para realizar el alta del No Socio.
+                // Validamos que el DNI no este registardo.
 
                 if (NuevoNoSocio.ExisteDni(dni, out error))
                 {
-                    MessageBox.Show($"Ya existe un No Socio registrado con el DNI {dni}.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Cuidado Dato Duplicado: Ya existe un No Socio registrado con el DNI {dni}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Si llegamos aca, el DNI ingresado no esta duplicado y los datos estan validados.
-                // Agregamos alerta para confirmar el Nuevo alta del No Socio.
+                // Agregamos una Ventana de Confirmación para confirmar el Nuevo alta del No Socio.
                 DialogResult result = MessageBox.Show(
                     $"¿Seguro que deseas dar de alta a {nombre} {apellido} DNI: {dni}? ",
                     "Confirmar Alta",
@@ -117,11 +148,14 @@ namespace Proyecto_Integrador_Grupo_11_B
                 NuevoNoSocio.AptoMedico = aptoMedico;
                 string EstadoAlta = NuevoNoSocio.RegistrarNoSocio();
 
+                //Si el proceso se completo correctamente, la ventana procede a cerrarse.
                 if (EstadoAlta == "OK")
                 {
-                    MessageBox.Show($"No Socio: {nombre} {apellido} registrado correctamente.");
+                    MessageBox.Show($"No Socio: {nombre} {apellido} registrado exitosamente.");
                     this.Close();
                 }
+
+            // Manejo de Errores en la Base de Datos y otras excepciones.
                 else
                 {
                     MessageBox.Show("No se pudo registrar el No Socio.");
@@ -134,11 +168,6 @@ namespace Proyecto_Integrador_Grupo_11_B
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
-        }
-
-        private void lblTitulo_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
