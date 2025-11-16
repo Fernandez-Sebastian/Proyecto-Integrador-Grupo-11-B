@@ -40,8 +40,22 @@ namespace Proyecto_Integrador_Grupo_11_B
                 string nombre = txtNombre.Text.Trim();
                 string apellido = txtApellido.Text.Trim();
                 DateTime fechaNacimiento = dtpFechaNacimiento.Value;
-                string aptoMedico = chkAptoMedico.Checked ? "S" : "N";
+                string aptoMedico = chkAptoMedico.Checked ? "S" : "N";             
 
+                //Validamos que el nombre NO este vacío y que NO tenga números
+
+                if (string.IsNullOrEmpty(nombre))
+                {
+                    MessageBox.Show("El campo Nombre no puede estar vacío.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (nombre.Any(char.IsDigit))
+                {
+                    MessageBox.Show("El Nombre no puede contener números.",
+                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 //Validamos que el dni NO este vacío y que SOLO tenga números
                 if (string.IsNullOrEmpty(dni))
@@ -53,21 +67,6 @@ namespace Proyecto_Integrador_Grupo_11_B
                 if (!dni.All(char.IsDigit))
                 {
                     MessageBox.Show("El DNI solo puede contener números.",
-                                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                //Validamos que el apellido NO este vacío y que NO tenga números
-
-                if (string.IsNullOrEmpty(nombre))
-                {
-                    MessageBox.Show("El campo Nombre no puede estar vacío.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (nombre.Any(char.IsDigit))
-                {
-                    MessageBox.Show("El Nombre no puede contener números.",
                                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
